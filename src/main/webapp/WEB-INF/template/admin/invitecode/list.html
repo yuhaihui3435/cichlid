@@ -1,0 +1,46 @@
+<%layout("/admin/_layout.html"){%>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            邀请码
+            <small>管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">邀请码列表</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <p class="toolbar">
+            <a class="create btn btn-success" href="javascript:">获取新邀请码</a>
+        </p>
+        <table id="table"
+               data-toggle="table"
+               data-url="/adminInvitecode/list"
+               data-content-type="application/x-www-form-urlencoded" data-method="POST"
+               data-show-columns="true"
+               data-show-refresh="true"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-toolbar=".toolbar"
+               data-search="true" >
+            <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="code">邀请码</th>
+                <th data-field="inviter" >邀请人</th>
+                <th data-field="subscriber">使用者</th>
+                <th data-field="stateTxt">使用状态</th>
+                <th data-field="catTxt">创建时间</th>
+                <th data-field="uatTxt">使用时间</th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</div>
+<script  src="/static/js/inviteCode.js"></script>
+<%}%>

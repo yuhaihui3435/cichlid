@@ -1,0 +1,19 @@
+<div class="article-btn">
+    <span style="margin: 0px 8px">浏览量:${viewCount!"0"}</span>
+    <%if(isEmpty(collectId!)){%>
+    <span class="cc-icon" onclick="collect(this,'${id}','${module}')"><i class="fa fa-star-o "  aria-hidden="true"></i></span>
+    <%}%>
+    <%if(isNotEmpty(collectId!)){%>
+    <span class="cc-icon-active" onclick="cancelCollect(this,'${collectId!}','${module}')"><i class="fa fa-star "  aria-hidden="true"></i></span>
+    <%}%>
+    <span id="collectCount">${collectCount!}</span>
+    <%if(isEmpty(laudId!)){%>
+    <span class="cc-icon" onclick="laud(this,'${id}','${module}')"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+    <%}%>
+    <%if(isNotEmpty(laudId!)){%>
+    <span class="cc-icon-active" onclick="cancelLaud(this,'${laudId!}','${module}')"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+    <%}%>
+    <span id="laudCount">${laudCount!}</span>
+
+
+</div>

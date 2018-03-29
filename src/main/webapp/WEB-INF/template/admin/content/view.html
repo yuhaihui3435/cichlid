@@ -1,0 +1,33 @@
+<div class="cc-article">
+    <h1 class="cc-article-title">
+        ${content.title}
+    </h1>
+    <div class="cc-article-meta">
+        <%if(isNotEmpty(content.catalog.columns.title)){%>
+            <span>分类：${content.catalog.columns.title}</span>
+        <%}%>
+        <%if(isNotEmpty(content.area.columns.title)){%>
+        <span>专区：${content.area.columns.title!}</span>
+        <%}%>
+        <span>作者：${content.userName}</span><span>创建日期：${content.catTxt}</span>
+        <%if(isNotEmpty(content.linkTo) )
+        {
+        print("<span>来源：<a href=\""+content.linkTo+"\">"+content.linkTo+"</a></span>");
+        }
+        %>
+    </div>
+    <div class="cc-article-content">
+        ${content.text}
+    </div>
+
+    <div class="cc-article-footer">
+        <p>
+        <%
+        for(tag in content.tags){
+        print("<span class=\"label label-success cc-tag\"><i class=\"fa fa-tag\"></i>"+tag.title+"</span>");
+        }
+        %>
+        </p>
+    </div>
+</div>
+

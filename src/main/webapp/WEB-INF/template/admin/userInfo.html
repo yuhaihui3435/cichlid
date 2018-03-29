@@ -1,0 +1,45 @@
+<form method="post" id="userInfo" >
+    <input type="hidden" name="user.id" value="${currUser.id}">
+    <h4>个人信息设置</h4>
+    <div class="form-group"><label>昵称</label><span class="required">*</span>
+        <input
+                class="form-control"
+                type="text" id="nickname"
+                name="user.nickname" value="${currUser.nickname}"
+        />
+    </div>
+    <div class="form-group"><label>手机号</label><span class="required">*</span>
+        <input
+                class="form-control"
+                type="text" id="phone"
+                name="user.phone" value="${currUser.phone}"
+        />
+    </div>
+    <div class="form-group"><label>EMAIL</label><span class="required">*</span>
+        <input
+                class="form-control"
+                type="text" id="email"
+                name="user.email" value="${currUser.email}"
+        />
+    </div>
+    <div class="form-group"><label>证件类型</label>
+        <select name="user.idcardtype" class="form-control input-large" id="idcardtype">
+
+            <option value="1" <% if(currUser.idcardtype == 1){%>selected<%}%>>身份证</option>
+            <option value="2" <% if(currUser.idcardtype == 2){%>selected<%}%>>军官证</option>
+            <option value="3" <% if(currUser.idcardtype == 3){%>selected<%}%>>护照</option>
+        </select>
+    </div>
+    <div class="form-group"><label>证件号</label>
+        <input
+                class="form-control"
+                type="text" id="idcard"
+                name="user.idcard" value="${currUser.idcard}"
+        />
+    </div>
+
+
+    <div class="form-group">
+        <input type="button" class="btn btn-success" id="userInfoSave_btn" value="保存修改"/></div>
+
+</form>

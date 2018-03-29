@@ -1,0 +1,274 @@
+<form method="post" id="notify" enctype="multipart/form-data">
+    <h4>邮件服务器设置</h4>
+    <div class="form-group"><label>SMTP服务器地址</label>
+        <input
+                class="form-control"
+                type="text" id="smtp"
+                name="smtp"/>
+    </div>
+    <div class="form-group"><label>用户名</label> <input
+            class="form-control"
+            type="text" id="emailName"
+            name="emailName"
+    />
+    </div>
+    <div class="form-group"><label>密码</label><input
+            class="form-control"
+            type="text" id="emailPassword"
+            name="emailPassword"
+    />
+    </div>
+    <div class="form-group"><label>SSL</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="ssl_y"
+                name="ssl"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="ssl_n"
+                name="ssl"
+        />否
+    </div>
+    <h4>短信设置</h4>
+    <div class="form-group"><label>服务商</label>
+        <select name="smsFacilitator" class="form-control" id="smsFacilitator">
+            <option value="aldy">阿里大鱼</option>
+        </select>
+    </div>
+    <div class="form-group"><label>App Key</label><input
+            class="form-control"
+            type="text" id="smsAppKey"
+            name="smsAppKey"
+    />
+    </div>
+    <div class="form-group"><label>App Secret</label><input
+            class="form-control"
+            type="text" id="smsAppSecret"
+            name="smsAppSecret"
+    />
+    </div>
+    <h4>作者通知</h4>
+    <div class="form-group"><label>开启邮件通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="emailNotify_y"
+                name="emailNotify"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="emailNotify_n"
+                name="emailNotify"
+        />否
+    </div>
+    <div class="form-group"><label>邮件通知内容</label><textarea
+            class="form-control"
+             id="emailNotifyContent"
+            name="emailNotifyContent"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启短信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="smsNotify_y"
+                name="smsNotify"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="smsNotify_n"
+                name="smsNotify"
+        />否
+    </div>
+    <div class="form-group"><label>短信通知内容</label><textarea
+            class="form-control"
+             id="smsNotifyContent"
+            name="smsNotifyContent"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启微信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="weChatNotify_y"
+                name="weChatNotify"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="weChatNotify_n"
+                name="weChatNotify"
+        />否
+    </div>
+    <div class="form-group"><label>微信通知内容</label><textarea
+            class="form-control"
+             id="weChatNotifyContent"
+            name="weChatNotifyContent"
+    ></textarea>
+    </div>
+    <h4>回复通知</h4>
+    <div class="form-group"><label>开启邮件通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="emailNotify_reply_y"
+                name="emailNotify_reply"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="emailNotify_reply_n"
+                name="emailNotify_reply"
+        />否
+    </div>
+    <div class="form-group"><label>邮件通知内容</label><textarea
+            class="form-control"
+             id="emailNotifyContent_reply"
+            name="emailNotifyContent_reply"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启短信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="smsNotify_reply_y"
+                name="smsNotify_reply"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="smsNotify_reply_n"
+                name="smsNotify_reply"
+        />否
+    </div>
+    <div class="form-group"><label>短信通知内容</label><textarea
+            class="form-control"
+             id="smsNotifyContent_reply"
+            name="smsNotifyContent_reply"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启微信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="weChatNotify_reply_y"
+                name="weChatNotify_reply"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="weChatNotify_reply_n"
+                name="weChatNotify_reply"
+        />否
+    </div>
+    <div class="form-group"><label>微信通知内容</label><textarea
+            class="form-control"
+             id="weChatNotifyContent_reply"
+            name="weChatNotifyContent_reply"
+    ></textarea>
+    </div>
+    <h4>@通知</h4>
+    <div class="form-group"><label>开启邮件通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="emailNotify_at_y"
+                name="emailNotify_at"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="emailNotify_at_n"
+                name="emailNotify_at"
+        />否
+    </div>
+    <div class="form-group"><label>邮件通知内容</label><textarea
+            class="form-control"
+             id="emailNotifyContent_at"
+            name="emailNotifyContent_at"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启短信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="smsNotify_at_y"
+                name="smsNotify_at"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="smsNotify_at_n"
+                name="smsNotify_at"
+        />否
+    </div>
+    <div class="form-group"><label>短信通知内容</label><textarea
+            class="form-control"
+             id="smsNotifyContent_at"
+            name="smsNotifyContent_at"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启微信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="weChatNotify_at_y"
+                name="weChatNotify_at"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="weChatNotify_at_n"
+                name="weChatNotify_at"
+        />否
+    </div>
+    <div class="form-group"><label>微信通知内容</label><textarea
+            class="form-control"
+             id="weChatNotifyContent_at"
+            name="weChatNotifyContent_at"
+    ></textarea>
+    </div>
+    <h4>管理员通知</h4>
+    <div class="form-group"><label>开启邮件通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="emailNotify_admin_y"
+                name="emailNotify_admin"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="emailNotify_admin_n"
+                name="emailNotify_admin"
+        />否
+    </div>
+    <div class="form-group"><label>邮件通知内容</label><textarea
+            class="form-control"
+             id="emailNotifyContent_admin"
+            name="emailNotifyContent_admin"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启短信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="smsNotify_admin_y"
+                name="smsNotify_admin"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="smsNotify_admin_n"
+                name="smsNotify_admin"
+        />否
+    </div>
+    <div class="form-group"><label>短信通知内容</label><textarea
+            class="form-control"
+            id="smsNotifyContent_admin"
+            name="smsNotifyContent_admin"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>开启微信通知</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="weChatNotify_admin_y"
+                name="weChatNotify_admin"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="weChatNotify_admin_n"
+                name="weChatNotify_admin"
+        />否
+    </div>
+    <div class="form-group"><label>微信通知内容</label><textarea
+            class="form-control"
+             id="weChatNotifyContent_admin"
+            name="weChatNotifyContent_admin"
+    ></textarea>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-success" id="notify_btn" value="保存修改"/></div>
+
+</form>

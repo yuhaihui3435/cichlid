@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鱼商详情</title>
+    <!-- boostrap 3.3.6 -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/screen.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!-- JiaThis Button BEGIN -->
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<section class="content-wrap">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8 main-content">
+                <article class="post">
+                    <header class="post-head">
+                        <h1 class="post-title">${supplier.name}</h1>
+                        <!--<section class="post-meta">-->
+                            <!--<span class="author">-->
+
+                            <!--</span>-->
+                            <!--<time class="post-date">加入时间：${supplier.cAt,'yyyy-MM-dd'}</time>-->
+                        <!--</section>-->
+                    </header>
+                    <section class="featured-media">
+                        <img src="${qn_url}/${supplier.picsStr}">
+                    </section>
+                    <section class="post-content">
+                        ${supplier.text}
+                    </section>
+                    <footer class="post-footer clearfix"></footer>
+                </article>
+                <div class="prev-next-wrap clearfix">
+                    <a class="btn btn-default" href=""><i class="fa fa-angle-left fa-fw"></i>上一页</a>
+                    <a href="" class="btn btn-default">下一页<i class="fa fa-angle-right fa-fw"></i></a>
+                </div>
+            </main>
+            <aside class="col-md-4 sidebar">
+                <div class="widget">
+                    <h4 class="title">详细情况</h4>
+                    <div class="content community">
+                        <p>手机号:&nbsp;&nbsp;${supplier.tel}</p>
+                        <p>微信号:&nbsp;&nbsp;${supplier.weChat}</p>
+                        <p>详细地址:&nbsp;&nbsp;${supplier.shengTxt}${supplier.shiTxt}${supplier.quTxt}${supplier.address}</p>
+                        <p>经营场所:&nbsp;&nbsp;${supplier.typeTxt}</p>
+                        <p>包损方式:&nbsp;&nbsp;${supplier.compensateTxt}</p>
+                        <p>是否支持进口订单:&nbsp;&nbsp;${supplier.orderSupportTxt}</p>
+                    </div>
+                </div>
+                <%
+                var catalogs=@com.dbd.cms.model.Supplier.dao.getCatalogs(supplier.id);
+                var ordertypes=@com.dbd.cms.model.Supplier.dao.getOrdertypes(supplier.id);
+                if(isNotEmpty(catalogs)){%>
+                <div class="widget">
+                    <h4 class="title">经营品系</h4>
+                    <div class="content tag-cloud">
+                        <%for( c in catalogs){%>
+                            <a href="#">${c.taxonomyTxt}</a>
+                        <%}%>
+                    </div>
+                </div>
+                <%}%>
+                <%if(supplier.orderSupport=='00'&&isNotEmpty(ordertypes)){%>
+                <div class="widget">
+                    <h4 class="title">支持订单类型</h4>
+                    <div class="content tag-cloud">
+                        <%for( c in ordertypes){%>
+                        <a href="#">${c.taxonomyTxt}</a>
+                        <%}%>
+                    </div>
+                </div>
+                <%}%>
+
+                <%if(isNotEmpty(supplier.QRCodePic)){%>
+                <div class="widget">
+                    <h4 class="title">扫码加他</h4>
+                    <div class="content community">
+                        <p><img class="img-responsive" src="${qn_url}/${supplier.QRCodePic}"></p>
+                    </div>
+                </div>
+                <%}%>
+            </aside>
+        </div>
+    </div>
+</section>
+</body>
+</html>

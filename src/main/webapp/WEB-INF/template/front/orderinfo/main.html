@@ -1,0 +1,124 @@
+
+<%layout("/front/_layout.html"){%>
+<script src="//cdn.bootcss.com/echarts/3.6.1/echarts.min.js"></script>
+<script src="/static/js/app_prototype.js"></script>
+<input type="hidden" id="isFront" >
+<section class="content-wrap main-container" >
+    <div class="container">
+        <ol class="breadcrumb" style="background: #ffffff">
+            <li><a href="/"  style="font-size: 2em">首页</a></li>
+            <li class="active" style="font-size: 1.5em">订单服务</li>
+        </ol>
+        <div class="row">
+            <div class="col-md-8 main-content">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h4 id="orderinfoTitle">订单列表<%if(isNotEmpty(orderinfo.name!)){%>【${orderinfo.name}】<%}%></h4>
+                    </div>
+                    <div class="box-body">
+                        <p class="toolbar">
+                            <select  id="catalogName" onchange="refreshTable()">
+
+                            </select>
+                        </p>
+                        <table id="table" data-content-type="application/x-www-form-urlencoded"
+                               data-toggle="table"
+                               data-url="/adminOrderinfo/orderDetailList"
+                               data-query-params="queryParams"
+                               data-show-columns="true"
+                               data-page-size="50"
+                               data-side-pagination="server"
+                               data-show-refresh="true"
+                               data-pagination="true"
+                               data-toolbar=".toolbar"
+                               data-search="true" data-method="POST">
+                            <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="scientificName" >学名</th>
+                                <th data-field="zhName" >中文名</th>
+                                <th data-field="catalogName" >大类名</th>
+                                <th data-field="size" >尺寸</th>
+                                <th data-field="price" >零售价</th>
+                                <th data-field="strain" >品系</th>
+                                <th data-field="action"
+                                    data-align="center"
+                                    data-formatter="actionFormatter"
+                                    data-events="actionEvents">操作
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" >
+                <div  id="filpTree">
+                    <div class="box box-primary front">
+                        <div class="box-header">
+                            <h4>订单树</h4>
+                        </div>
+                        <div class="box-body">
+                            <ul id="orderTree" class="ztree"></ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="form-modal-setKb" class="modal fade" >
+    <div class="modal-dialog modal-dialog-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">知识库查询</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <table id="searchKb-table" data-content-type="application/x-www-form-urlencoded"
+                           data-toggle="table"
+                           data-url="/adminKnowledgebase/list"
+                           data-show-columns="true"
+                           data-page-size="50"
+                           data-side-pagination="server"
+                           data-show-refresh="true"
+                           data-pagination="true"
+                           data-search="true" data-method="POST">
+                        <thead>
+                        <tr>
+                            <th data-field="scName">学名</th>
+                            <th data-field="zhName" >中文名</th>
+                            <th data-field="speciesTxt">种属</th>
+                            <th data-field="sgTxt">亚群体</th>
+                            <th data-field="action"
+                                data-align="center"
+                                data-formatter="setKbActionFormatter"
+                                data-events="actionEvents">操作
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="orderinfoId" id="orderinfoId" value="${orderinfoId!}">
+<input type="hidden" name="orderdetailId" id="orderdetailId">
+<input type="hidden" name="kbId" id="kbId">
+<script src="/static/js/orderinfo.js"></script>
+<script>
+    $("#orderinfoId").val('${orderinfoId!}');
+    $catalogNameSel.val('');
+    queryCatalogName();
+</script>
+<%}%>
+

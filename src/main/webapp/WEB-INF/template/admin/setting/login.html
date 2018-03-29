@@ -1,0 +1,78 @@
+<form method="post" id="login" enctype="multipart/form-data">
+    <h4>登录注册设置</h4>
+    <div class="form-group"><label>是否邮件验证</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="emailCheck_y"
+                name="emailCheck"/>是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="emailCheck_n"
+                name="emailCheck"/>否
+    </div>
+    <div class="form-group"><label>邮件模板</label> <textarea
+            class="form-control"
+             id="emailTemplate"
+            name="emailTemplate" maxlength="255"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>是否短信验证</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="smsCheck_y"
+                name="smsCheck"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="smsCheck_n"
+                name="smsCheck"
+        />否
+    </div>
+    <div class="form-group"><label>短信模板</label><textarea
+            class="form-control"
+            type="text" id="smsTemplate"
+            name="smsTemplate" maxlength="255"
+    ></textarea>
+    </div>
+    <h4>第三方登录</h4>
+    <div class="form-group"><label>QQ APP Key</label><input
+            class="form-control"
+            type="text" id="qqAppKey"
+            name="qqAppKey"
+    />
+    </div>
+    <div class="form-group"><label>QQ APP Secret</label><input
+            class="form-control"
+            type="text" id="qqAppSecret"
+            name="qqAppSecret"
+    />
+    </div>
+    <div class="form-group"><label>微信 APP Key</label><input
+            class="form-control"
+            type="text" id="wechatAppKey"
+            name="wechatAppKey"
+    />
+    </div>
+    <div class="form-group"><label>微信 APP Secret</label><input
+            class="form-control"
+            type="text" id="wechatAppSecret"
+            name="wechatAppSecret"
+    />
+    </div>
+    <div class="form-group"><label>新浪微博 APP Key</label><input
+            class="form-control"
+            type="text" id="sinaAppKey"
+            name="sinaAppKey"
+    />
+    </div>
+    <div class="form-group"><label>新浪微博 APP Secret</label><input
+            class="form-control"
+            type="text" id="sinaAppSecret"
+            name="sinaAppSecret"
+    />
+    </div>
+
+    <div class="form-group">
+        <input type="button" class="btn btn-success" id="login_btn" value="保存修改"/></div>
+
+</form>

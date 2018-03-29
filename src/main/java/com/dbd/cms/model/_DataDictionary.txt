@@ -1,0 +1,261 @@
+Table: c_attachment
+--------------+---------------------+------+-----+---------+---------
+ Field        | Type                | Null | Key | Default | Remarks 
+--------------+---------------------+------+-----+---------+---------
+ id           | BIGINT UNSIGNED(20) | NO   | PRI |         | ID主键    
+ title        | TEXT(65535)         | YES  |     |         | 标题      
+ user_id      | BIGINT UNSIGNED(20) | YES  |     |         | 上传附件的用户ID
+ content_id   | BIGINT UNSIGNED(20) | YES  |     |         | 附件所属的内容ID
+ path         | VARCHAR(512)        | YES  |     |         | 路径      
+ mime_type    | VARCHAR(128)        | YES  |     |         | mime    
+ suffix       | VARCHAR(32)         | YES  |     |         | 附件的后缀   
+ type         | VARCHAR(32)         | YES  |     |         | 类型      
+ flag         | VARCHAR(256)        | YES  |     |         | 标示      
+ lat          | DECIMAL(20,16)      | YES  |     |         | 经度      
+ lng          | DECIMAL(20,16)      | YES  |     |         | 纬度      
+ order_number | INT(10)             | YES  |     |         | 排序字段    
+ created      | DATETIME(19)        | YES  |     |         | 上传时间    
+--------------+---------------------+------+-----+---------+---------
+
+Table: c_comment
+----------------+----------------------+------+-----+---------+---------
+ Field          | Type                 | Null | Key | Default | Remarks 
+----------------+----------------------+------+-----+---------+---------
+ id             | BIGINT UNSIGNED(20)  | NO   | PRI |         | 主键ID    
+ parent_id      | BIGINT UNSIGNED(20)  | YES  |     |         | 回复的评论ID 
+ content_id     | BIGINT UNSIGNED(20)  | YES  |     |         | 评论的内容ID 
+ content_module | VARCHAR(32)          | YES  |     |         | 评论的内容模型 
+ comment_count  | INT UNSIGNED(10)     | YES  |     | 0       | 评论的回复数量 
+ order_number   | INT UNSIGNED(10)     | YES  |     | 0       | 排序编号，常用语置顶等
+ user_id        | BIGINT UNSIGNED(20)  | YES  |     |         | 评论的用户ID 
+ ip             | VARCHAR(64)          | YES  |     |         | 评论的IP地址 
+ author         | VARCHAR(128)         | YES  |     |         | 评论的作者   
+ type           | VARCHAR(32)          | YES  |     | comment | 评论的类型，默认是comment
+ text           | LONGTEXT(2147483647) | YES  |     |         | 评论的内容   
+ agent          | TEXT(65535)          | YES  |     |         | 提交评论的浏览器信息
+ created        | DATETIME(19)         | YES  |     |         | 评论的时间   
+ slug           | VARCHAR(128)         | YES  |     |         | 评论的slug 
+ email          | VARCHAR(64)          | YES  |     |         | 评论用户的email
+ status         | VARCHAR(32)          | YES  |     |         | 评论的状态   
+ vote_up        | INT UNSIGNED(10)     | YES  |     | 0       | “顶”的数量  
+ vote_down      | INT UNSIGNED(10)     | YES  |     | 0       | “踩”的数量  
+ flag           | VARCHAR(256)         | YES  |     |         | 标识      
+ lat            | DECIMAL(20,16)       | YES  |     |         | 纬度      
+ lng            | DECIMAL(20,16)       | YES  |     |         | 经度      
+----------------+----------------------+------+-----+---------+---------
+
+Table: c_content
+------------------+----------------------+------+-----+---------+---------
+ Field            | Type                 | Null | Key | Default | Remarks 
+------------------+----------------------+------+-----+---------+---------
+ id               | BIGINT UNSIGNED(20)  | NO   | PRI |         | 主键ID    
+ title            | TEXT(65535)          | YES  |     |         | 标题      
+ text             | LONGTEXT(2147483647) | YES  |     |         | 内容      
+ summary          | TEXT(65535)          | YES  |     |         | 摘要      
+ link_to          | VARCHAR(256)         | YES  |     |         | 连接到(常用于谋文章只是一个连接)
+ markdown_enable  | BIT                  | YES  |     | 0       | 是否启用markdown  1：是，0：否
+ thumbnail        | VARCHAR(128)         | YES  |     |         | 缩略图     
+ module           | VARCHAR(32)          | YES  |     |         | 模型      
+ style            | VARCHAR(32)          | YES  |     |         | 样式      
+ user_id          | BIGINT UNSIGNED(20)  | YES  |     |         | 用户ID    
+ author           | VARCHAR(128)         | YES  |     |         | 匿名稿的用户  
+ user_email       | VARCHAR(128)         | YES  |     |         | 匿名稿的邮箱  
+ user_ip          | VARCHAR(128)         | YES  |     |         | IP地址    
+ user_agent       | TEXT(65535)          | YES  |     |         | 发布浏览agent
+ parent_id        | BIGINT UNSIGNED(20)  | YES  |     |         | 父级内容ID  
+ object_id        | BIGINT UNSIGNED(20)  | YES  |     |         | 关联的对象ID 
+ order_number     | INT UNSIGNED(10)     | YES  |     | 0       | 排序编号    
+ status           | VARCHAR(32)          | YES  |     |         | 状态      
+ vote_up          | INT UNSIGNED(10)     | YES  |     | 0       | 支持人数    
+ vote_down        | INT UNSIGNED(10)     | YES  |     | 0       | 反对人数    
+ rate             | INT(10)              | YES  |     |         | 评分分数    
+ rate_count       | INT UNSIGNED(10)     | YES  |     | 0       | 评分次数    
+ price            | DECIMAL(10,2)        | YES  |     | 0.00    | 价格      
+ comment_status   | VARCHAR(32)          | YES  |     |         | 评论状态    
+ comment_count    | INT UNSIGNED(10)     | YES  |     | 0       | 评论总数    
+ comment_time     | DATETIME(19)         | YES  |     |         | 最后评论时间  
+ view_count       | INT UNSIGNED(10)     | YES  |     | 0       | 访问量     
+ c_at             | DATETIME(19)         | YES  |     |         | 创建日期    
+ d_at             | DATETIME(19)         | YES  |     |         | 删除时间    
+ modified         | DATETIME(19)         | YES  |     |         | 最后更新日期  
+ slug             | VARCHAR(128)         | YES  |     |         | slug    
+ show_status      | BIT                  | YES  |     |         | 显示状态1：是，0：否
+ m_at             | DATETIME(19)         | YES  |     |         | 修改时间    
+ flag             | VARCHAR(256)         | YES  |     |         | 标识      
+ lng              | DECIMAL(20,16)       | YES  |     |         | 经度      
+ lat              | DECIMAL(20,16)       | YES  |     |         | 纬度      
+ meta_keywords    | VARCHAR(256)         | YES  |     |         | SEO关键字  
+ meta_description | VARCHAR(256)         | YES  |     |         | SEO描述信息 
+ remarks          | TEXT(65535)          | YES  |     |         | 备注信息    
+ good             | BIT                  | YES  |     |         | 精华1：是，0：否
+ top              | BIT                  | YES  |     |         | 置顶1：是，0：否
+ unlock_comment   | BIT                  | YES  |     |         | 开启评论1：是，0：否
+------------------+----------------------+------+-----+---------+---------
+
+Table: c_mapping
+-------------+---------------------+------+-----+---------+---------
+ Field       | Type                | Null | Key | Default | Remarks 
+-------------+---------------------+------+-----+---------+---------
+ id          | BIGINT UNSIGNED(20) | NO   | PRI |         | 主键ID    
+ content_id  | BIGINT UNSIGNED(20) | NO   |     |         | 内容ID    
+ taxonomy_id | BIGINT UNSIGNED(20) | NO   |     |         | 分类ID    
+-------------+---------------------+------+-----+---------+---------
+
+Table: c_metadata
+-------------+---------------------+------+-----+---------+---------
+ Field       | Type                | Null | Key | Default | Remarks 
+-------------+---------------------+------+-----+---------+---------
+ id          | BIGINT UNSIGNED(20) | NO   | PRI |         | 主键ID    
+ meta_key    | VARCHAR(255)        | YES  |     |         | 元数据key  
+ meta_value  | TEXT(65535)         | YES  |     |         | 元数据value
+ object_type | VARCHAR(32)         | YES  |     |         | 元数据的对象类型
+ object_id   | BIGINT UNSIGNED(20) | YES  |     |         | 元数据的对象ID
+-------------+---------------------+------+-----+---------+---------
+
+Table: c_taxonomy
+------------------+---------------------+------+-----+---------+---------
+ Field            | Type                | Null | Key | Default | Remarks 
+------------------+---------------------+------+-----+---------+---------
+ id               | BIGINT UNSIGNED(20) | NO   | PRI |         | 主键ID    
+ title            | VARCHAR(512)        | YES  |     |         | 标题      
+ text             | TEXT(65535)         | YES  |     |         | 内容描述    
+ slug             | VARCHAR(128)        | YES  |     |         | slug    
+ type             | VARCHAR(32)         | YES  |     |         | 类型      
+ icon             | VARCHAR(128)        | YES  |     |         | 图标      
+ content_module   | VARCHAR(32)         | YES  |     |         | 对于的内容模型 
+ content_count    | INT UNSIGNED(10)    | YES  |     | 0       | 该分类的内容数量
+ order_number     | INT(10)             | YES  |     |         | 排序编码    
+ parent_id        | BIGINT UNSIGNED(20) | YES  |     |         | 父级分类的ID 
+ object_id        | BIGINT UNSIGNED(20) | YES  |     |         | 关联的对象ID 
+ flag             | VARCHAR(256)        | YES  |     |         | 标识      
+ lat              | DECIMAL(20,16)      | YES  |     |         | 经度      
+ lng              | DECIMAL(20,16)      | YES  |     |         | 纬度      
+ meta_keywords    | VARCHAR(256)        | YES  |     |         | SEO关键字  
+ meta_description | VARCHAR(256)        | YES  |     |         | SEO描述内容 
+ created          | DATETIME(19)        | YES  |     |         | 创建日期    
+ show_status      | BIT                 | YES  |     |         | 显示状态1：是，0：否
+------------------+---------------------+------+-----+---------+---------
+
+Table: s_action_log
+-----------+----------------------+------+-----+---------+---------
+ Field     | Type                 | Null | Key | Default | Remarks 
+-----------+----------------------+------+-----+---------+---------
+ id        | INT UNSIGNED(10)     | NO   | PRI |         |         
+ action    | VARCHAR(100)         | YES  |     |         |         
+ ip        | VARCHAR(100)         | YES  |     |         |         
+ act_at    | DATETIME(19)         | YES  |     |         |         
+ result    | VARCHAR(20)          | YES  |     |         |         
+ data      | LONGTEXT(2147483647) | YES  |     |         |         
+ userId    | BIGINT(19)           | YES  |     |         |         
+ loginname | VARCHAR(50)          | YES  |     |         |         
+-----------+----------------------+------+-----+---------+---------
+
+Table: s_notification
+---------------+----------------------+------+-----+---------+---------
+ Field         | Type                 | Null | Key | Default | Remarks 
+---------------+----------------------+------+-----+---------+---------
+ id            | INT(10)              | NO   | PRI |         |         
+ read          | BIT                  | NO   |     |         | 是否已读：0默认 1已读
+ author        | VARCHAR(50)          | NO   |     |         | 发起通知用户昵称
+ target_author | VARCHAR(50)          | NO   |     |         | 要通知用户的昵称
+ in_time       | DATETIME(19)         | NO   |     |         | 录入时间    
+ action        | VARCHAR(255)         | NO   |     |         | 通知动作    
+ tid           | INT(10)              | NO   |     |         | 话题id    
+ content       | LONGTEXT(2147483647) | YES  |     |         |         
+---------------+----------------------+------+-----+---------+---------
+
+Table: s_once_log
+----------+------------------+------+-----+---------+---------
+ Field    | Type             | Null | Key | Default | Remarks 
+----------+------------------+------+-----+---------+---------
+ id       | INT UNSIGNED(10) | NO   | PRI |         |         
+ cat      | DATETIME(19)     | YES  |     |         | 创建时间    
+ lat      | DATETIME(19)     | YES  |     |         | 失效时间    
+ dat      | DATETIME(19)     | YES  |     |         | 删除时间    
+ operName | VARCHAR(50)      | YES  |     |         | 操作名称    
+ result   | VARCHAR(2)       | YES  |     |         | 处理结果00已处理，01 逾期未处理
+ num      | VARCHAR(128)     | YES  |     |         | 唯一编号    
+ salt     | VARCHAR(32)      | YES  |     |         | 盐       
+----------+------------------+------+-----+---------+---------
+
+Table: s_param
+-------+---------------------+------+-----+---------+---------
+ Field | Type                | Null | Key | Default | Remarks 
+-------+---------------------+------+-----+---------+---------
+ id    | BIGINT UNSIGNED(20) | NO   | PRI |         |         
+ key   | VARCHAR(100)        | YES  |     |         | 键       
+ val   | VARCHAR(255)        | YES  |     |         | 值       
+-------+---------------------+------+-----+---------+---------
+
+Table: s_res
+-------------+------------------+------+-----+---------+---------
+ Field       | Type             | Null | Key | Default | Remarks 
+-------------+------------------+------+-----+---------+---------
+ id          | INT UNSIGNED(10) | NO   | PRI |         |         
+ name        | VARCHAR(100)     | YES  |     |         | 资源名     
+ url         | VARCHAR(255)     | YES  |     |         | 资源url   
+ description | VARCHAR(100)     | YES  |     |         | 说明      
+ pid         | INT(10)          | YES  |     |         | 父id     
+ seq         | INT(10)          | YES  |     |         | 顺序      
+ logged      | CHAR(1)          | YES  |     |         | 是否需要记录日志1：是，0：否
+-------------+------------------+------+-----+---------+---------
+
+Table: s_role
+-------------+------------------+------+-----+---------+---------
+ Field       | Type             | Null | Key | Default | Remarks 
+-------------+------------------+------+-----+---------+---------
+ id          | INT UNSIGNED(10) | NO   | PRI |         |         
+ name        | VARCHAR(50)      | YES  |     |         | 角色名     
+ description | VARCHAR(255)     | YES  |     |         | 说明      
+-------------+------------------+------+-----+---------+---------
+
+Table: s_role_res
+--------+---------+------+-----+---------+---------
+ Field  | Type    | Null | Key | Default | Remarks 
+--------+---------+------+-----+---------+---------
+ roleId | INT(10) | YES  |     |         | 角色id    
+ resId  | INT(10) | YES  |     |         | 资源id    
+ id     | INT(10) | NO   | PRI |         |         
+--------+---------+------+-----+---------+---------
+
+Table: s_user
+--------------------+---------------------+------+-----+---------+---------
+ Field              | Type                | Null | Key | Default | Remarks 
+--------------------+---------------------+------+-----+---------+---------
+ id                 | BIGINT UNSIGNED(20) | NO   | PRI |         |         
+ idcard             | VARCHAR(50)         | YES  |     |         | 证件号     
+ nickname           | VARCHAR(50)         | YES  |     |         | 昵称      
+ score              | INT(10)             | YES  |     | 0       | 积分      
+ avatar             | VARCHAR(255)        | YES  |     |         | 头像      
+ email              | VARCHAR(255)        | YES  |     |         | 邮件      
+ signature          | VARCHAR(1000)       | YES  |     |         | 个性签名    
+ third_id           | VARCHAR(100)        | YES  |     |         | 三方登陆id  
+ access_token       | VARCHAR(100)        | YES  |     |         | 登陆印证token
+ receive_msg        | BIT                 | YES  |     |         | 是否接受社区消息  1：是，0：否
+ c_at               | DATETIME(19)        | YES  |     |         | 创建时间    
+ m_at               | DATETIME(19)        | YES  |     |         | 更新时间    
+ phone              | VARCHAR(20)         | YES  |     |         | 电话号     
+ channel            | VARCHAR(100)        | YES  |     |         | 第三方渠道   
+ status             | VARCHAR(1)          | YES  |     |         | 状体0-默认，1-禁用
+ third_access_token | VARCHAR(100)        | YES  |     |         | 第三方登录获取的access_token
+ logged             | DATETIME(19)        | YES  |     |         | 最后登录时间  
+ activated          | DATETIME(19)        | YES  |     |         | 激活时间    
+ email_status       | BIT                 | YES  |     |         | email是否认证 1：是，0：否
+ phone_status       | BIT                 | YES  |     |         | phone认证1：是，0：否
+ content_count      | INT(10)             | YES  |     | 0       | 发布数     
+ comment_count      | INT(10)             | YES  |     | 0       | 评论数     
+ idcardtype         | TINYINT(3)          | YES  |     |         | 身份证件类型  
+ password           | VARCHAR(128)        | YES  |     |         | 登陆密码    
+ salt               | VARCHAR(32)         | YES  |     |         | 盐       
+ loginname          | VARCHAR(50)         | YES  |     |         | 登陆名     
+--------------------+---------------------+------+-----+---------+---------
+
+Table: s_user_role
+-------+------------------+------+-----+---------+---------
+ Field | Type             | Null | Key | Default | Remarks 
+-------+------------------+------+-----+---------+---------
+ id    | INT UNSIGNED(10) | NO   | PRI |         |         
+ uid   | BIGINT(19)       | YES  |     |         | 用户id    
+ rid   | INT(10)          | YES  |     |         | 角色id    
+-------+------------------+------+-----+---------+---------
+

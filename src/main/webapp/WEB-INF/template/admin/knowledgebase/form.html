@@ -1,0 +1,195 @@
+<form method="post" id="modal-form"  enctype="multipart/form-data" >
+    <div id="form-modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-large">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">知识库信息</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="knowledgebase.id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"><label>学名<span class="required">*</span></label><input
+                                    class="form-control"
+                                    type="text" id="scName"
+                                    name="knowledgebase.scName" maxlength="255"
+                            />
+                            </div>
+                            <div class="form-group"><label>商业名</label><input
+                                    class="form-control"
+                                    type="text" id="bName"
+                                    name="knowledgebase.bName" maxlength="255"
+                            />
+                            </div>
+
+
+
+                            <div class="form-group"><label>属种大类</label>
+
+                                <select id="p_species" name="" class="form-control input-large"
+                                        onchange="querySChildren(this.value)">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(specy in species){
+                                    %>
+                                    <option value="${specy.id}">${specy.title}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group"><label>繁殖方式</label>
+                                <select id="rt" name="knowledgebase.rt" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(rt in rtList){
+                                    %>
+                                    <option value="${rt.id}">${rt.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label>两性差别</label>
+                                <select id="mf" name="knowledgebase.mf" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(mf in mfList){
+                                    %>
+                                    <option value="${mf.id}">${mf.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label>同种攻击性</label>
+                                <select id="ha" name="knowledgebase.ha" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(ha in haList){
+                                    %>
+                                    <option value="${ha.id}">${ha.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label>稀有程度</label>
+                                <select id="rare" name="knowledgebase.rare" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(rare in rareList){
+                                    %>
+                                    <option value="${rare.id}">${rare.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>地域</label>
+                                <select id="area" name="knowledgebase.areaId" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(area in f_areas){
+                                    %>
+                                    <option value="${area.id}">${area.enName}|${area.zhName}|${area.ownerTxt}|${area.py}
+                                    </option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"><label>英文名</label><input
+                                    class="form-control"
+                                    type="text" id="enName"
+                                    name="knowledgebase.enName" maxlength="255"
+                            />
+                            </div>
+
+                            <div class="form-group"><label>中文名</label><input
+                                    class="form-control"
+                                    type="text" id="zhName"
+                                    name="knowledgebase.zhName" maxlength="255"
+                            />
+                            </div>
+
+                            <div class="form-group"><label>属种小类</label>
+                                <select id="species" name="knowledgebase.speciesId" class="form-control input-large">
+                                    <option value="">请先选择大类</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label>繁殖难易度</label>
+                                <select id="reproduce" name="knowledgebase.reproduce" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(reproduce in reproduceList){
+                                    %>
+                                    <option value="${reproduce.id}">${reproduce.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>食性</label>
+                                <select id="fh" name="knowledgebase.fh" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(fh in fhList){
+                                    %>
+                                    <option value="${fh.id}">${fh.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>异种攻击性</label>
+                                <select id="ca" name="knowledgebase.ca" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(ca in caList){
+                                    %>
+                                    <option value="${ca.id}">${ca.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>饲养难度</label>
+                                <select id="breed" name="knowledgebase.breed" class="form-control input-large">
+                                    <option value="">请选择</option>
+                                    <%
+                                    for(breed in breedList){
+                                    %>
+                                    <option value="${breed.id}">${breed.val}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>体长</label>
+                                <input type="text" value="" id="bLen" name="knowledgebase.bLen" class="slider form-control" data-slider-min="3" data-slider-max="50" data-slider-step="1" data-slider-value="[5,20]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label>栖息方式</label>
+                                <select id="habitat" name="habitats" class="form-control input-large">
+                                    <%
+                                    for(perch in perchList){
+                                    %>
+                                    <option value="${perch.id}">${perch.val}
+                                    </option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label>封面</label>
+                                <input type="file" name="knowledgebase.thumbnail" id="thumbnail">
+                                <input type="hidden" id="thumbnail_bak" name="thumbnail_bak" >
+                            </div>
+                        </div>
+                        <div class="col-md-12" >
+                            <div class="form-group" ><label>说明</label>
+                                <textarea id="remark" name="knowledgebase.remark" style="height:380px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <span id="savingSpan" class="label label-success" style="display: none">保存草稿中......</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="submit" class="btn btn-success" id="btn" value="保存"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

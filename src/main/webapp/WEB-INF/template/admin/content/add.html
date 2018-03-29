@@ -1,0 +1,40 @@
+<%layout("/admin/_layout.html"){%>
+<script type="text/javascript" src="/static/plugins/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/plugins/plupload/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="/static/plugins/qiniu.js"></script>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            文章
+            <small>管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">新增文章</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">新增文章</h3>
+                        <span id="savingSpan" class="pull-right label label-success" style="display: none">保存草稿中......</span>
+                    </div>
+                    <div class="box-body">
+                        <%include("/admin/content/form.html"){}%>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default" id="previewBtn"><i class="fa fa-eye"></i> 预览</button>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-success" id="publishBtn"><i class="fa fa-save"></i> 保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script  src="/static/js/content_form.js"></script>
+<%}%>

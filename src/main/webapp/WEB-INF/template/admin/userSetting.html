@@ -1,0 +1,31 @@
+<%layout("/admin/_layout.html"){%>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            个人设置
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admincc"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">主窗体</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="nav-tabs-custom ">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab">个人信息</a></li>
+                <li><a href="#tab_2" data-toggle="tab">密码修改</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <%include("/admin/userInfo.html"){}%>
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    <%include("/admin/modifyPassword.html"){}%>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/static/js/userSetting.js"></script>
+<%}%>

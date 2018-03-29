@@ -1,0 +1,32 @@
+<!--gallery -->
+<script src="/static/js/jquery.chocolat.js"></script>
+<!--light-box-files -->
+<script type="text/javascript">
+    $(function() {
+        $('.moments-bottom a').Chocolat();
+    });
+</script>
+<!--gallery js-->
+<div id="kl" class="gallery">
+    <div class="container">
+        <h3><a href="/kl" target="_blank"> 知识库</a></h3>
+        <div class="gallery-info">
+
+            <% for(g in galleryList)
+                {
+
+                    print("<div class=\"col-md-4 galry-grids moments-bottom\">");
+                    print("<a class=\"b-link-stripe b-animate-go\" id=\""+g.id+"\" title=\""+g.scName+"\"href=\""+qn_url+g.thumbnail+"?imageMogr2/auto-orient/thumbnail/640x427!/blur/1x0/quality/75|imageslim\">");
+                    print("<img  src=\""+qn_url+g.thumbnail+"?imageMogr2/auto-orient/thumbnail/640x427!/blur/1x0/quality/75|imageslim\" class=\"img-responsive\" />");
+                    print("<div class=\"b-wrapper\">");
+                    print("<span class=\"b-animate b-from-left    b-delay03 \">");
+                    print("<img class=\"img-responsive\"  />");
+                    print("</span>");
+                    print("</div></a></div>");
+                }
+            %>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!---->

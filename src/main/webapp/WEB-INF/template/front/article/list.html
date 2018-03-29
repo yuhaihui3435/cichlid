@@ -1,0 +1,110 @@
+
+<%layout("/front/_layout.html"){%>
+<section class="content-wrap main-container" >
+    <div class="container">
+        <ol class="breadcrumb" style="background: #ffffff">
+            <li><a href="/"  style="font-size: 2em">首页</a></li>
+            <li class="active" style="font-size: 1.5em">杂七杂八</li>
+        </ol>
+        <div class="row">
+                <div class="container" style="margin-bottom: 20px">
+                    <%for(c in catalogs){%>
+
+                    <%if((taxonomy.title!)==c.title){%>
+                    <a  class="btn btn-primary" style="margin-bottom: 5px;margin-top: 5px">${c.title}(${c.contentCount})</a>
+                    <%}else{%>
+
+                    <a type="button" href="/art?tId=${c.id}" style="margin-bottom: 5px;margin-top: 5px" class="btn btn-success">${c.title}(${c.contentCount})</a>
+                    <%}%>
+
+                    <%}%>
+                </div>
+            <div class="col-md-8 main-content">
+
+                        <%
+
+                            for (art in page.list){
+
+                            %>
+                        <article class="post">
+                            <%if(art.good==false){%>
+                            <div class="featured" title="精华">
+                                <i class="fa fa-thumbs-o-up fa-2x"></i>
+                            </div>
+                            <%}%>
+
+                            <div class="post-head">
+                                <h1 class="post-title">${art.title}</h1>
+                                <div class="post-meta">
+                                    <span class="author">
+                                            作者:${art.userName}
+                                    </span>
+                                    <time class="post-date">时间：${art.cAt,'yyyy-MM-dd'}</time>
+                                </div>
+                            </div>
+                            <%if(isNotEmpty(art.thumbnail)){%>
+                            <div class="featured-media">
+                                <img src="${qn_url}/${art.thumbnail}">
+                            </div>
+                            <%}%>
+                            <div class="post-content">
+                                ${art.summary}
+                            </div>
+                            <div class="post-permalink">
+                                <%if(isNotEmpty(taxonomy.id!)){%>
+                                    <a href="/art/view?id=${art.id}&tId=${taxonomy.id!}"  class="btn btn-default">查看</a>
+                                <%}else{%>
+                                    <a href="/art/view?id=${art.id}"  class="btn btn-default">查看</a>
+                                <%}%>
+                            </div>
+                            <footer class="post-footer clearfix">
+                                <%if(isNotEmpty(art.tags)){%>
+                                    <div class="pull-left tag-list">
+                                        <i class="fa fa-tags"></i>
+                                        <%for(t in art.tags){%>
+                                            <a >${t.title}</a>
+                                        <%}%>
+                                    </div>
+                                <%}%>
+                            </footer>
+                        </article>
+                        <%}%>
+                        <%if(isEmpty(page.list)){%>
+                            <%include("/common/dataNull.html",{dataNullMsg:'该分类下没有找到文章，我们建议您返回首页浏览，谢谢。'}){}  %>
+                        <%}%>
+
+                        <%if(isNotEmpty(page.list)){%>
+                        <div class="f-pagination">
+
+                            <%if(!@page.isFirstPage()){%>
+                            <a class="newer-posts"  href="javascript:changePage('${(page.pageNumber-1)*15-15}')"><i class="fa fa-angle-left fa-fw"></i></a>
+                            <%}%>
+
+                            <span class="page-number">第${page.pageNumber}页/共${page.totalPage}页&nbsp;&nbsp;&nbsp;共${page.totalRow}条数据</span>
+
+                            <%if(!@page.isLastPage()){%>
+                            <a class="newer-posts" href="javascript:changePage('${(page.pageNumber*15)+1}')"><i class="fa fa-angle-right fa-fw"></i></a>
+                            <%}%>
+                        </div>
+                        <%}%>
+                    </div>
+
+
+            <aside class="col-md-4 sidebar">
+                <%include("/front/widget/oi.html") {} %>
+                <%include("/front/widget/kl.html") {} %>
+            </aside>
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function changePage(pn) {
+        location.href='/art?tId=${c.id!}&offset='+pn;
+    }
+
+</script>
+<%}%>
+

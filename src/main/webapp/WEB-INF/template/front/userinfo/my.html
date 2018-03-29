@@ -1,0 +1,201 @@
+<%layout("/front/_layout.html"){%>
+<script src="/static/plugins/pagination/jquery.pagination.js"></script>
+<style>
+    .M-box {
+        margin: 20px 0 10px;
+        text-align: center;
+        display: block;
+        position: relative;
+         float: none;
+        left: 50%;
+    }
+    .box-comments .box-comment img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    .box-comments .comment-text {
+        margin-left: 80px;
+        color: #000;
+    }
+    .box-comments {
+        background: #ffffff;
+    }
+    .box-comments .box-comment:first-of-type {
+        padding-top: 10px;
+    }
+    .box-comments .box-comment {
+        padding: 10px 10px;
+        border-bottom: 1px solid #eee;
+    }
+    .comment-text-footer{
+        margin-left: 80px;
+        margin-top: 10px;
+        color: #555;
+    }
+    .attachment-block {
+        border: 1px solid #f4f4f4;
+        padding: 5px;
+        margin-bottom: 10px;
+        margin-left: 90px;
+        margin-top: 10px;
+        background: #f7f7f7;
+    }
+    .attachment-block .attachment-pushed {
+        margin-left: 80px;
+    }
+    .todo-list > li .text {
+         display: inline;
+         margin-left: 0px;
+        font-weight: 600;
+    }
+
+</style>
+<section class="content-wrap main-container" >
+    <input type="hidden" id="seeUId" value="${seeUId!}">
+    <input type="hidden" id="nickname" value="${currUser.nickname!}">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-widget widget-user-2">
+                <div class="widget-user-header bg-light-blue">
+                    <%if(isEmpty(seeUser)){%>
+                    <div class="widget-user-image">
+                        <img src="${currUser.avatar!}?v={date()}" class="img-circle">
+                    </div>
+                    <h3 class="widget-user-username">${currUser.nickname!}</h3>
+                    <h5 class="widget-user-desc">
+                        <!--${currUser.signature!}-->&nbsp;
+                    </h5>
+                    <%}else{%>
+                    <div class="widget-user-image">
+                        <img src="${seeUser.avatar!}?v={date()}" class="img-circle">
+                    </div>
+                    <h3 class="widget-user-username">${seeUser.nickname!}</h3>
+                    <h5 class="widget-user-desc">
+                        <!--${currUser.signature!}-->&nbsp;
+                    </h5>
+
+                    <%}%>
+                </div>
+
+                <div class="box-footer">
+                    <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header" id="myCollectsLabel">${collects}</h5>
+                            <span class="description-text">收藏数</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header" id="myFollowersLabel">${followers!}</h5>
+                            <span class="description-text">粉丝数</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="description-block">
+                            <h5 class="description-header" id="myIfollowLabel">${ifollow}</h5>
+                            <span class="description-text">关注数</span>
+                        </div>
+                    </div>
+                    <%if(isNotEmpty(isFollow!)){%>
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <%if(isNotEmpty(priLetter)){%>
+                                <a class="btn btn-primary btn-block"  onclick="viewRecords('${priLetter.id!}','${priLetter.priBetterRecordCount}','${seeUser.nickname}','${seeUser.id}')">私信他</a>
+                            <%}else{%>
+                                <a class="btn btn-primary btn-block"  onclick="viewRecords('0','0','${seeUser.nickname}','${seeUser.id}')">私信他</a>
+                            <%}%>
+                            <%if(isFollow=='no'){%>
+                                <a class="btn btn-primary btn-block" onclick="follow('${seeUId!}',this)" >关注</a>
+                                <a class="btn btn-danger btn-block" onclick="cancelFollow('${seeUId!}',this)" style="display: none;">取消关注</a>
+                            <%}else{%>
+                                <a class="btn btn-primary btn-block" onclick="follow('${seeUId!}',this)" style="display: none;">关注</a>
+                                <a class="btn btn-danger btn-block" onclick="cancelFollow('${seeUId!}',this)" >取消关注</a>
+                            <%}%>
+                        </div>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+            <!--<div class="box box-solid">-->
+                <!--<div class="box-header with-border"></div>-->
+                <!--<div class="box-body no-padding" style="display: block;">-->
+                    <!--<ul class="nav nav-pills nav-stacked">-->
+                        <!--<li class=""></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+
+                <%if(isEmpty(seeUId)){%>
+                    <li class="${myReplyActive!}" >
+                        <a href="#myReply" data-toggle="tab">我的评论</a>
+                    </li>
+                <%}else{%>
+                    <li class="${myReplyActive!}">
+                        <a href="#myReply" data-toggle="tab">他的评论</a>
+                    </li>
+                <%}%>
+                <%if(isEmpty(seeUId)){%>
+                <li class="${atMeActive!}">
+                    <a href="#atMe" data-toggle="tab">@我</a>
+                </li>
+                <%}%>
+                <%if(isEmpty(seeUId)){%>
+                <li class="${myPletterActive!}">
+                    <a href="#myPletter" data-toggle="tab">我的私信</a>
+                </li>
+                <%}%>
+                <%if(isEmpty(seeUId)){%>
+                <li class="${myFollowActive!}">
+                    <a href="#myFollow" data-toggle="tab">我的关注</a>
+                </li>
+                <%}else{%>
+                    <li class="${myFollowActive!}">
+                        <a href="#myFollow" data-toggle="tab">他的关注</a>
+                    </li>
+                <%}%>
+                <%if(isEmpty(seeUId)){%>
+                <li class="${myCollectActive!}">
+                    <a href="#myCollect" data-toggle="tab">我的收藏</a>
+                </li>
+                <%}%>
+                <!--<li class="${uplpadAvatarActive!}">-->
+                    <!--<a href="uplpadAvatar" data-toggle="tab">修改头像</a>-->
+                <!--</li>-->
+            </ul>
+                <div class="tab-content">
+                    <div class="tab-pane ${atMeActive!}" id="atMe">
+
+
+                    </div>
+                    <div class="tab-pane ${myReplyActive!}" id="myReply">
+
+
+                    </div>
+                    <div class="tab-pane ${myPletterActive!}" id="myPletter">
+
+
+                    </div>
+                    <div class="tab-pane ${myFollowActive!}" id="myFollow">
+
+
+                    </div>
+                    <div class="tab-pane ${myCollectActive!}" id="myCollect">
+
+
+                    </div>
+                </div>
+
+        </div>
+
+        </div>
+    </div>
+</div>
+</section>
+<script src="/static/js/f_my.js"></script>
+<%}%>

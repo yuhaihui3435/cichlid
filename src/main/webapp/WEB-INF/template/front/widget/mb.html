@@ -1,0 +1,36 @@
+<!--<link rel="stylesheet" href="/static/plugins/jqPagination/jqpagination.css">-->
+<script src="/static/plugins/pagination/jquery.pagination.js"></script>
+<input type="hidden" id="contentModule" value="${contentModule!}">
+<input type="hidden" id="contentId" value="${contentId!}">
+<input type="hidden" id="currUserNickname" value="${currUser.nickname!}">
+<input type="hidden" id="authorId" value="${authorId!}">
+<script>
+    loadReplyList(0)
+</script>
+<div class="cc-reply">
+    <h2>评论</h2>
+    <ul class="cc-reply-list">
+
+        <li>
+            <div class="cc-reply-user-img">
+                <%if(isNotEmpty(currUser.avatar!)){%>
+                <a href="#" target="_blank"><img src="${currUser.avatar!}"></a>
+                <%}else{%>
+                <a href="#" target="_blank"><img src="${qn_url}${anonymousAvatar}?v=${date()}"></a>
+                <%}%>
+            </div>
+            <div class="cc-reply-item">
+                <div class="cc-reply-input-box">
+                    <textarea class="cc-reply-mini-editor" id="replyContent" placeholder="说点啥" oninput="autoHeight(this, 30);" onkeyup="autoHeight(this, 30);"></textarea>
+                    <span onclick="replaySubmit(this)" class="cc-reply-submit">提交</span>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+
+
+</div>
+<div class="M-box">
+
+</div>

@@ -1,0 +1,79 @@
+<%layout("/admin/_layout.html"){%>
+<script type="text/javascript" src="/static/plugins/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/plugins/plupload/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="/static/plugins/qiniu.js"></script>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            鱼商
+            <small>管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">鱼商列表</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <p class="toolbar">
+            <a class="create btn btn-success" href="javascript:">新增鱼商信息</a>
+            <a class="delete btn btn-danger" href="javascript:">删除鱼商信息</a>
+            <select id="shengSelect"  onchange="queryShi()">
+                <option value="">请选择</option>
+                <% for( sheng in shengList ){%>
+                    <option value="${sheng.id}">${sheng.name}</option>
+                <%}%>
+            </select>
+            <select id="shiSelect" onchange="queryQu()">
+                <option value="">请选择</option>
+            </select>
+            <select id="quSelect" onchange="refreshTable()">
+                <option value="">请选择</option>
+            </select>
+            <select id="stateSelect" onchange="refreshTable()">
+                <option value="">请选择</option>
+                <option value="0">正常</option>
+                <option value="1">禁用</option>
+            </select>
+        </p>
+        <table id="table"
+               data-toggle="table"
+               data-url="/adminSupplier/list"
+               data-content-type="application/x-www-form-urlencoded" data-method="POST"
+               data-show-columns="true"
+               data-show-refresh="true"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-toolbar=".toolbar"
+               data-query-params="queryParams"
+               data-query-params-type="limit"
+               data-search="true" >
+            <thead>
+            <tr>
+                <th data-field="status" data-checkbox="true"></th>
+                <th data-field="name">鱼商名</th>
+                <th data-field="tel">联系方式</th>
+                <th data-field="typeTxt" >经营规模</th>
+                <th data-field="orderSupportTxt">订单支持</th>
+                <th data-field="shengTxt">省</th>
+                <th data-field="shiTxt">市</th>
+                <th data-field="quTxt">区</th>
+                <th data-field="rate">评分</th>
+                <th data-field="authTxt">网站认证</th>
+                <th data-field="stateTxt">状态</th>
+                <th data-field="sourceTxt">数据来源</th>
+                <th data-field="action"
+                    data-align="center"
+                    data-formatter="actionFormatter"
+                    data-events="actionEvents">操作
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</div>
+<%include("/admin/supplier/form.html"){}%>
+<script  src="/static/js/supplier.js"></script>
+<%}%>

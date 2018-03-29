@@ -1,0 +1,94 @@
+
+<%layout("/front/_layout.html"){%>
+<style>
+    .article-btn {
+        /*float: right;*/
+        /*margin: -5px 10px 0 0;*/
+        color: #666;
+        font-size: larger;
+    }
+</style>
+<!--<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>-->
+<section class="content-wrap main-container" >
+    <div class="container">
+        <ol class="breadcrumb" style="background: #ffffff">
+            <li><a href="/"  style="font-size: 2em">首页</a></li>
+            <li><a href="/art/"  style="font-size: 2em">杂七杂八</a></li>
+            <%if(isNotEmpty(taxonomy)){%>
+                <li><a href="/art?tId=${taxonomy.id}"  style="font-size: 2em">${taxonomy.title}</a></li>
+            <%}%>
+            <li class="active" style="font-size: 1.5em">${art.title}</li>
+
+        </ol>
+
+        <div class="row">
+            <div class="col-md-12 main-content">
+
+
+                <article class="post">
+                    <%if(art.good==false){%>
+                    <div class="featured" title="精华">
+                        <i class="fa fa-thumbs-o-up fa-2x"></i>
+                    </div>
+                    <%}%>
+
+                    <div class="post-head">
+
+                        <!--<div class="jiathis_style pull-left" >-->
+                            <!--<a class="jiathis_button_weixin"></a>-->
+                            <!--<a class="jiathis_button_qzone"></a>-->
+                            <!--<a class="jiathis_button_tsina"></a>-->
+                            <!--<a class="jiathis_button_tqq"></a>-->
+                            <!--<a class="jiathis_button_renren"></a>-->
+                        <!--</div>-->
+                        <div class="clearfix"></div>
+                        <h1 class="post-title">${art.title}</h1>
+                        <%include("/front/widget/lc.html",{'collectCount':art.collectCount!,'laudCount':art.laudCount!,'module':'content',id:art.id}){}%>
+                        <div class="post-meta">
+                                    <span class="author">
+                                            作者:${art.userName}
+                                    </span>
+                            <time class="post-date">时间：${art.cAt,'yyyy-MM-dd'}</time>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!--<div class="featured-media">-->
+                        <!--<img src="${qn_url}/${art.thumbnail}" class="img">-->
+                    <!--</div>-->
+                    <div class="post-content">
+                        ${art.text}
+                    </div>
+                    <footer class="post-footer clearfix">
+                        <%if(isNotEmpty(art.tags)){%>
+                        <div class="pull-left tag-list">
+                            <i class="fa fa-tags"></i>
+                            <%for(t in art.tags){%>
+                            <a href="/art/queryByTag?tId=${t.id}">${t.title}</a>
+                            <%}%>
+                        </div>
+                        <%}%>
+                    </footer>
+                </article>
+
+                <div class="f-pagination">
+                    <%if(isNotEmpty(pre)){%>
+                        <a  href="/art/view?id=${pre.id}&tId=${tId!}" style="padding-right:20px"><i class="fa fa-angle-left fa-fw"></i>${pre.title}</a>
+                    <%}%>
+
+                    <%if(isNotEmpty(next)){%>
+                        <a  href="/art/view?id=${next.id}&tId=${tId!}" style="padding-left: 20px">${next.title}<i class="fa fa-angle-right fa-fw"></i></a>
+                    <%}%>
+                </div>
+                <div class="clearfix"></div>
+                <%include("/front/widget/mb.html"){}%>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%}%>
+

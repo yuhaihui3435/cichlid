@@ -1,0 +1,59 @@
+<%layout("/admin/_layout.html"){%>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            文章
+            <small>管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">文章列表</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <p class="toolbar">
+            <a class="create btn btn-success" href="/adminContent/toA"><i class="fa fa-pencil"></i>新增文章</a>
+            <a class="forbidden btn btn-danger" href="javascript:" onclick="delContent()"><i class="fa fa-trash-o"></i>删除文章</a>
+            <!--<a class="forbidden btn btn-success" href="javascript:"><i class="fa fa-recycle"></i>回收站</a>-->
+            <span class="bootTableAlert"></span>
+        </p>
+        <table id="table"
+               data-toggle="table"
+               data-url="/adminContent/list"
+               data-content-type="application/x-www-form-urlencoded" data-method="POST"
+               data-show-columns="true"
+               data-show-refresh="true"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-toolbar=".toolbar"
+               data-search="true" >
+            <thead>
+            <tr>
+                <th data-field="ck" data-checkbox="true"></th>
+                <th data-field="title">标题</th>
+                <th data-field="userName">作者</th>
+                <th data-field="catTxt">创建时间</th>
+                <th data-field="statusTxt">状态</th>
+                <th data-field="originalTxt">原创</th>
+                <th data-field="commentStatusTxt">开启评论</th>
+                <th data-field="goodTxt">精华</th>
+                <th data-field="topTxt">置顶</th>
+                <th data-field="catalog.columns.title">分类</th>
+                <th data-field="area.columns.title">专区</th>
+                <th data-field="action"
+                    data-align="center"
+                    data-formatter="actionFormatter"
+                    data-events="actionEvents">操作
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</div>
+
+<%include("/admin/content/preview.html"){}%>
+<script  src="/static/js/content_list.js"></script>
+<%}%>

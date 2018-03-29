@@ -1,0 +1,102 @@
+<form method="post" id="conventional" enctype="multipart/form-data">
+    <h4>网站信息</h4>
+    <div class="form-group"><label>网站运行状态</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="siteState_y"
+                name="siteState"/>运行
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="siteState_n"
+                name="siteState"/>暂停
+    </div>
+    <div class="form-group"><label>网站内容是否审批</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="contentCheckState_y" checked
+                name="contentCheckState"/>是
+        <input
+                class="flat-red" value="1"
+                type="radio" id="contentCheckState_n"
+                name="contentCheckState"/>否
+    </div>
+    <div class="form-group"><label>网站名称</label><input
+            class="form-control"
+            type="text" id="siteName"
+            name="siteName" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>网站标题</label> <input
+            class="form-control"
+            type="text" id="siteTitle"
+            name="siteTitle" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>网站副标题</label><input
+            class="form-control"
+            type="text" id="siteSubheading"
+            name="siteSubheading" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>描述</label><textarea
+            class="form-control"
+            id="siteDescription"
+            name="siteDescription"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>网站域名</label><input
+            class="form-control"
+            type="text" id="siteDomain"
+            name="siteDomain" maxlength="255"
+    />
+    </div>
+
+    <div class="form-group"><label>邮箱</label><input
+            class="form-control"
+            type="text" id="siteEmail"
+            name="siteEmail" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>手机号</label><input
+            class="form-control"
+            type="text" id="sitePhone"
+            name="sitePhone" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>微信号</label><input
+            class="form-control"
+            type="text" id="siteWechat"
+            name="siteWechat" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>版权信息</label><input
+            class="form-control"
+            type="textarea" id="siteCopyright"
+            name="siteCopyright" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>ICP</label><input
+            class="form-control"
+            type="text" id="siteICP"
+            name="siteICP" maxlength="255"
+    />
+    </div>
+    <div class="form-group"><label>流量统计代码</label><textarea
+            class="form-control" rows="10"
+            id="siteStatistics"
+            name="siteStatistics" maxlength="255"
+    ></textarea>
+    </div>
+    <div class="form-group"><label>公告</label><textarea
+            class="form-control" rows="10"
+            id="notice"
+            name="notice"
+    ></textarea>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-success" id="conventional_btn" value="保存修改"/>
+        <input type="button" class="btn btn-success" id="refresh_cache_btn" value="刷新缓存"/>
+        <input type="button" class="btn btn-success" id="refresh_kl_btn" value="刷新知识库"/>
+    </div>
+
+</form>

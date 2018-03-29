@@ -1,0 +1,44 @@
+<form method="post" id="modal-form">
+    <div id="form-modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-small">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">地域信息</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="area.id">
+                    <div class="form-group"><label>英文名<span class="required">*</span></label><input
+                            class="form-control"
+                            type="text" id="enName"
+                            name="area.enName" maxlength="100"
+                    />
+                    </div>
+                    <div class="form-group"><label>中文名</label><input
+                            class="form-control"
+                            type="text" id="zhName"
+                            name="area.zhName" maxlength="100"
+                    />
+                    </div>
+                    <div class="form-group"><label>国家名</label><input
+                            class="form-control"
+                            type="text" id="state"
+                            name="area.state" maxlength="255"
+                    />
+                    </div>
+                    <div class="form-group"><label>所属</label>
+                        <select id="owner" name="area.owner" class="form-control input-large">
+                            <option value="00">马拉维湖</option>
+                            <option value="01">坦噶尼喀湖</option>
+                            <option value="02">维多利亚湖</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="submit" class="btn btn-success" id="btn" value="保存"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

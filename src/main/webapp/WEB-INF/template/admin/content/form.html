@@ -1,0 +1,178 @@
+<style>
+    .bootstrap-tagsinput {
+        width: 100%;
+    }
+    .twitter-typeahead .tt-query,
+    .twitter-typeahead .tt-hint {
+        margin-bottom: 0;
+    }
+
+    .twitter-typeahead .tt-hint
+    {
+        display: none;
+    }
+
+    .tt-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        list-style: none;
+        font-size: 14px;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-clip: padding-box;
+        cursor: pointer;
+    }
+
+    .tt-suggestion {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: 1.428571429;
+        color: #333333;
+        white-space: nowrap;
+    }
+
+    .tt-suggestion:hover,
+    .tt-suggestion:focus {
+        color: #ffffff;
+        text-decoration: none;
+        outline: 0;
+        background-color: #428bca;
+    }
+
+</style>
+<form method="POST" id="content" enctype="multipart/form-data">
+    <input type="hidden" id="id" name="content.id" value="${content.id!}"/>
+    <input type="hidden" name="content.module" value="article">
+    <div class="form-group">
+
+        <select id="catalog" class="form-control" name="catalog" data-bv-notempty data-bv-notempty-message="请选择分类">
+            <option value="">选择分类</option>
+            <%
+                for(c in catalogs!){
+
+                   if(c.title==content.catalog.columns.title!){
+                        print("<option value=\""+c.id+"\" selected>"+c.title+"</option>");
+                    }else{
+                        print("<option value=\""+c.id+"\">"+c.title+"</option>");
+                    }
+                }
+            %>
+        </select>
+    </div>
+    <div class="form-group">
+        <select id="area" name="area" class="form-control" >
+            <option value="">选择专区</option>
+            <%
+            for(a in areas!){
+            if(a.title==content.area.columns.title!){
+                print("<option value=\""+a.id+"\" selected>"+a.title+"</option>");
+            }else{
+                print("<option value=\""+a.id+"\">"+a.title+"</option>");
+            }
+
+            }
+            %>
+        </select>
+    </div>
+
+    <div class="form-group">
+
+        <input  type="text" name="tags" id="tags" data-role="tagsinput">
+            <%
+            //for(t in tags!){
+            //    print("<option value=\""+t.id+"\">"+t.title+"</option>");
+            //}
+            %>
+            <script>
+                var tagsData=[];
+            </script>
+            <%
+            for(t in tags!){%>
+                <script>
+                    tagsData.push({id:'${t.id}',title:'${t.title}'});
+                </script>
+            <%}%>
+
+        </input>
+    </div>
+   <script>
+       var $tags = $('#tags');
+       var tags_data = new Bloodhound({
+           datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+           queryTokenizer: Bloodhound.tokenizers.whitespace,
+           local: tagsData
+       });
+       tags_data.initialize();
+       $tags.tagsinput({
+           trimValue: true,
+           maxChars: 100,
+           typeaheadjs: {
+               name: 'tags_data',
+               displayKey: 'title',
+               valueKey: 'title',
+               source: tags_data.ttAdapter()
+           }
+       });
+
+   </script>
+    <div class="form-group"><input
+            class="form-control"
+            type="text" id="title" placeholder="标题"
+            name="content.title" maxlength="255" data-bv-notempty data-bv-notempty-message="标题必填" value="${content.title!}"
+    />
+    </div>
+    <div class="form-group">
+        <textarea id="summary" class="form-control" placeholder="摘要"
+                  name="content.summary">${content.summary!}</textarea>
+    </div>
+    <div class="form-group" style="height:400px;">
+        <textarea id="text" name="content.text" style="height:380px;" ></textarea>
+    </div>
+
+    <div class="form-group">
+
+        <input type="radio" class="flat-red" name="original" value="0"  checked id="original_y">原创
+        <input type="radio" class="flat-red" name="original" value="1"   id="original_n">转载
+    </div>
+
+    <div class="form-group">
+        <input type="url" data-bv-uri-message="输入的网址无效" style="display: none" name="content.link_to"
+               class="form-control input-sm" id="link_to" placeholder="转载地址" value="${content.link_to!}">
+    </div>
+    <div class="form-group"><label>缩略图：</label> <input
+            type="file" id="thumbnail"
+            name="content.thumbnail"
+    />
+        <input type="hidden" name="thumbnail_bak" id="thumbnail_bak">
+    </div>
+    <div class="form-group">
+        <label>开启评论：</label>
+        <input type="radio" class="flat-red" id="comment_status_y" name="content.comment_status" value="0"  >是
+        <input type="radio" class="flat-red" id="comment_status_n" name="content.comment_status" value="1" checked>否
+    </div>
+    <div class="form-group">
+        <label>精华：</label>
+        <input type="radio" class="flat-red" id="good_y" name="content.good" value="0"  >是
+        <input type="radio" class="flat-red" id="good_n"name="content.good" value="1" checked>否
+    </div>
+    <div class="form-group">
+        <label>置顶：</label>
+        <input type="radio" class="flat-red" id="top_y" name="content.top" value="0"  >是
+        <input type="radio" class="flat-red" id="top_n" name="content.top" value="1" checked>否
+    </div>
+
+</form>
+<%include("/admin/content/preview.html"){}%>

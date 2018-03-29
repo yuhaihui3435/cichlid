@@ -1,0 +1,87 @@
+
+<style>
+    .user-image {
+        float: left;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        margin-top: -5px;
+    }
+        .navbar-nav>li>a {
+            padding-top: 25px;
+            padding-bottom: 15px;
+        }
+    .navbar-btn {
+        margin-top: 14px;
+        margin-bottom: 8px;
+    }
+</style>
+
+<nav id="home" class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img alt="慈鲷CC"  src="${qn_url}images/sys/logo.png?v=${date()}"></a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navC" aria-expanded="false">
+
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navC">
+            <ul class="nav navbar-nav">
+                <li><a href="/">首页</a></li>
+                <li><a  href="/kl/">知识库</a></li>
+                <li><a  href="/orderinfo/">订单服务</a></li>
+                <li><a  href="/supplier/">鱼商服务</a></li>
+                <li><a  href="/art/">杂七杂八</a></li>
+                <!--<li><a  href="javascript:showNotice()">公告</a></li>-->
+            </ul>
+            <%if(isEmpty(currUser)){%>
+            <button type="button" id="loginBtn" class="btn btn-primary navbar-btn pull-right" onclick="toLogin('')">登录</button>
+            <%}else{%>
+            <ul class="nav navbar-nav navbar-right" id="settingBtn">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false"><img src="${currUser.avatar!}" class="user-image">${currUser.nickname!}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/my">设置</a></li>
+                        <li><a href="/my?active=atMeActive">@我</a></li>
+                        <li><a href="/my?active=myPletterActive">私信</a></li>
+                        <%if(currUser.isAdmin=='0'){%>
+                        <li><a href="/admincc">管理控制台</a></li>
+                        <%}%>
+                        <li role="separator" class="divider"></li>
+
+                        <li><a href="javascript:logout()">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <%}%>
+        </div>
+
+    </div>
+</nav>
+
+<script>
+
+    function showNotice() {
+        layer.open({
+            type: 1
+            ,title: false //不显示标题栏
+            ,closeBtn: false
+            ,area: '500px;'
+            ,shade: 0.8
+            ,id: 'cccc_notice' //设定一个id，防止重复弹出
+            ,resize: false
+            ,btn: [ '我明白了']
+            ,btnAlign: 'r'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,content: $("#notice")
+            ,success: function(layero){
+
+            }
+        });
+    }
+    function logout() {
+        var thisUrl=window.location.href;
+        window.location.href='/logout?prevUrl='+thisUrl;
+    }
+</script>

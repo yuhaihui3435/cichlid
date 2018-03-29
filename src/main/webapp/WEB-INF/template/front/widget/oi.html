@@ -1,0 +1,10 @@
+<div class="widget">
+    <h4 class="title"><a href="/orderinfo/">订单</a></h4>
+    <div class="content community">
+        <%for(o in newOrderinfo5){%>
+
+        <p><a  href="/orderinfo?orderinfoId=${o.id}" target="_blank"><i  class="fa fa-building" ></i>&nbsp;${o.name}</a></p>
+
+        <%}%>
+    </div>
+</div>

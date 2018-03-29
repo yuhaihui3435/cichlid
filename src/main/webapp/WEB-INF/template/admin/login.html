@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="${description!}">
+    <meta name="keywords" content="${keywords!}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>${siteName!}</title>
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="icon" type="image/png" href="/static/i/favicon.png">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="/static/i/app-icon72x72@2x.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="${appName!}"/>
+    <link rel="apple-touch-icon-precomposed" href="/static/i/app-icon72x72@2x.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/static/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+
+    <!-- boostrap 3.3.6 -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/AdminLTE.css">
+    <link href="//cdn.bootcss.com/iCheck/1.0.2/skins/square/blue.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/plugins/fakeloader/fakeLoader.css">
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap-daterangepicker/2.1.24/moment.min.js"></script>
+    <script src="//cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap-validator/0.5.3/js/language/zh_CN.min.js"></script>
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="/static/plugins/fakeloader/fakeLoader.js"></script>
+    <script src="/static/js/app.js"></script>
+    <style>
+        .form-captcha-control-feedback {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            display: block;
+            width: 100px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="/admincc/index"><b>CiChlid.CC</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">请登录</p>
+
+        <form action="/admincc/login" method="post" id="loginForm" data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+              data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+              data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+            <input type="hidden" name="callback" value="${callback!}">
+            <div class="form-group has-feedback">
+                <input type="text" name="cc_username" class="form-control" placeholder="用户名"  data-bv-notempty="true"
+                       data-bv-notempty-message="用户名必填">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="cc_password" class="form-control" placeholder="密码"  data-bv-notempty="true"
+                       data-bv-notempty-message="密码必填">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group ">
+
+                <input type="text" name="inputRandomCode" class="form-control" placeholder="验证码" maxlength="4"  data-bv-notempty="true"
+                       data-bv-notempty-message="验证码必填">
+
+            </div>
+            <div class="form-group">
+                <img src="/admincc/captcha"   id="captcha" onclick="loadCaptcha()">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox" name="rememberMe" value="0"> 两周免登录<span style="color: #f71752">（请勿在公共环境使用）</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+
+                <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn" class="btn btn-primary btn-block btn-flat">登录</button>
+                </div>
+            </div>
+        </form>
+        <!-- /.social-auth-links -->
+
+        <a href="#">忘记密码？</a><br>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<script>
+    var $form=$('#loginForm');
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        $form.bootstrapValidator({
+            message: '该值无效',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            }
+        });
+        document.onkeydown = function(e){
+            var ev = document.all ? window.event : e;
+            if(ev.keyCode==13) {
+                doLogin();
+            }
+        }
+        $form.submit(function(ev){ev.preventDefault();});
+        $("#btn").on("click", function(){
+            doLogin();
+        });
+    });
+
+    function loadCaptcha() {
+        $("#captcha").attr("src",'/admincc/captcha?v='+Math.random());
+    }
+    function doLogin() {
+        var bootstrapValidator = $form.data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(bootstrapValidator.isValid()){
+            showFakeloader();
+            $.post('/admincc/login',
+                $form.serialize(),
+                function (data, status) {
+                    hideFakeloader();
+                    if (status == 'success') {
+                        if (data.resCode == 'success') {
+                            swal('', data.resMsg, 'success');
+                            if(data.resData.callback !=""){
+                                window.location=data.resData.callback;
+                            }else{
+                                window.location='/admincc/index';
+                            }
+                        } else {
+                            swal('', data.resMsg, 'error');
+                            $("#btn").prop("disabled", false);
+                            loadCaptcha();
+                        }
+                    } else {
+                        swal('', data.resMsg, 'error');
+                        $("#btn").prop("disabled", false);
+                        loadCaptcha();
+                    }
+                }).error(function() { $("#btn").prop("disabled", false);serverErrorAlert();loadCaptcha();});
+        }
+        else return;
+    }
+</script>
+</body>
+</html>

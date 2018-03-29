@@ -1,0 +1,68 @@
+<%if(has(newArticleList5)&&has(newKnowledgebase5)){%>
+<div class="f-main-footer">
+        <div class="container">
+                <div class="row">
+                        <div class="col-sm-4">
+                                <div class="widget">
+                                        <h4 class="title">杂七杂八</h4>
+                                        <div class="content recent-post">
+                                                <%for(c in newArticleList5){%>
+                                                <div class="recent-single-post">
+                                                        <a href="/art/view?id=${c.id}" target="_blank">${c.title}</a>
+                                                        <!--<div class="date">${c.catTxt}</div>-->
+                                                </div>
+                                                <%}%>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-sm-4">
+                                <div class="widget">
+                                        <h4 class="title">知识库</h4>
+                                        <div class="content recent-post">
+                                                <%for(k in newKnowledgebase5){%>
+                                                <div class="recent-single-post">
+                                                        <a href="/view?id=${k.id}" target="_blank">${k.scName}</a>
+                                                        <!--<div class="date">${k.cAt}</div>-->
+                                                </div>
+                                                <%}%>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-sm-4">
+                                <div class="widget">
+                                      <h4 class="title">友情链接</h4>
+                                        <div class=" tag-cloud friend-links">
+                                                <!--<a href="http://www.t.tt" target="_blank" title="锤子科技">锤子科技</a>-->
+                                                <a href="http://www.jfinal.com" target="_blank" title="Java开发利器">JFinal</a>
+                                                <a href="http://www.ibeetl.com" target="_blank" title="好用的模板语言">Beetl</a>
+                                        </div>
+                                        <div >
+                                                <!--<img class="img-responsive" style="max-height: 200px" src="${qn_url}images/sys/qrcode_shyxqgzq.jpg">-->
+                                                <img class="img-responsive" style="max-height: 200px" src="/static/i/qrcode_cc_wx.jpg">
+                                        </div>
+                                </div>
+
+                        </div>
+                </div>
+        </div>
+</div>
+<%}%>
+<div class="copyright">
+
+        <div class="container">
+                <div class="row">
+                        <div class="col-sm-12">
+                                <span>Copyright ©2017 源代码</span>|<span>辽ICP备17002779号-1</span>
+                        </div>
+                </div>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+</script>
+<a href="#to-top" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!---->

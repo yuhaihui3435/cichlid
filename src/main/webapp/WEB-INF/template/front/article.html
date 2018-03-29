@@ -1,0 +1,18 @@
+<div id="blog" class="blog">
+    <div class="container">
+        <h3><a href="/art?tId=349" >杂七杂八</a></h3>
+        <div class="blog-grids">
+
+            <% for(a in articleList){%>
+            <div class="col-md-6 blog-grid">
+                <a href="/art/view?id=${a.id}"><img src="${qn_url}/${a.thumbnail}" class="img-responsive" alt=""/></a>
+                <h4><a href="/art/view?id=${a.id}">${a.title}</a></h4>
+                <span>${a.catTxt}</span>
+                <p>${a.summary}</p>
+            </div>
+            <%}%>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+</div>

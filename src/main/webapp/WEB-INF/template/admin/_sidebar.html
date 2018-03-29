@@ -1,0 +1,27 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">操作菜单</li>
+            <%
+            for(r in currUserReses!){%>
+            <li class="treeview" id="tm-${r.id!}">
+                <a href="#" onclick="cacheMenuState('topMenu','${r.id!}')">
+                    <i class="fa fa-dashboard"></i><span>${r.name}</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <%
+                var thisChlidren=@com.dbd.cms.model.Res.dao.findSecResesByUserId(currUser.id,r.id);
+                if (thisChlidren.~size>0){%>
+                    <ul class="treeview-menu">
+                        <% for (r1 in thisChlidren!){%>
+                            <li id="tm-${r1.id}"><a href="#" onclick="cacheMenuState('secMenu','${r1.id}');location.href='${r1.url}'"><i class="fa fa-circle-o"></i>${r1.name}</a></li>
+                        <%}%>
+                    </ul>
+                <%}}%>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

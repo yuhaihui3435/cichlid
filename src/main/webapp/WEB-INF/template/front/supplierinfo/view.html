@@ -1,0 +1,131 @@
+
+<!-- JiaThis Button BEGIN -->
+<%layout("/front/_layout.html"){%>
+<!--<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>-->
+<!-- JiaThis Button END -->
+<style>
+    .article-btn {
+        /*float: right;*/
+        /*text-align: center;*/
+        /*margin: 10px 10px 0 0;*/
+        font-size: larger;
+        color: #666;
+
+    }
+</style>
+<section class="content-wrap main-container" >
+    <div class="container">
+        <ol class="breadcrumb" style="background: #ffffff">
+            <li><a href="/" style="font-size: 2em">首页</a></li>
+            <li><a href="/supplier/" style="font-size: 2em">精选鱼商</a></li>
+            <li class="active" style="font-size: 1.5em">${supplier.name}</li>
+        </ol>
+        <div class="row">
+            <main class="col-md-8 main-content">
+                <article class="post">
+                    <header class="post-head">
+                        <!--<div class="pull-left">-->
+                            <!--<div class="jiathis_style ">-->
+                                <!--<a class="jiathis_button_weixin"></a>-->
+                                <!--<a class="jiathis_button_qzone"></a>-->
+                                <!--<a class="jiathis_button_tsina"></a>-->
+                                <!--<a class="jiathis_button_tqq"></a>-->
+                                <!--<a class="jiathis_button_renren"></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="clearfix"></div>
+                        <h1 class="post-title">${supplier.name}</h1>
+                        <%include("/front/widget/lc.html",{'collectCount':supplier.collectCount!,'laudCount':supplier.laudCount!,'module':'supplier',id:supplier.id}){}%>
+                        <!--<section class="post-meta">-->
+                            <!--<span class="author">-->
+
+                            <!--</span>-->
+                            <!--<time class="post-date">加入时间：${supplier.cAt,'yyyy-MM-dd'}</time>-->
+                        <!--</section>-->
+
+                    </header>
+                    <section class="featured-media">
+                        <img src="${qn_url}/${supplier.picsStr}">
+                    </section>
+                    <section class="post-content">
+                        ${supplier.text}
+                    </section>
+                    <footer class="post-footer clearfix"></footer>
+                </article>
+                <div class="f-pagination">
+                    <%if(isNotEmpty(pre)){%>
+                    <a  href="javascript:view('${pre.id}')" style="padding-right:20px"><i class="fa fa-angle-left fa-fw"></i>${pre.name}</a>
+                    <%}%>
+
+                    <%if(isNotEmpty(next)){%>
+                    <a  href="javascript:view('${next.id}')" style="padding-left: 20px">${next.name}<i class="fa fa-angle-right fa-fw"></i></a>
+                    <%}%>
+                </div>
+            </main>
+            <aside class="col-md-4 sidebar">
+                <div class="widget">
+                    <h4 class="title">详细情况</h4>
+                    <div class="content community">
+                        <p>手机号:&nbsp;&nbsp;${supplier.tel}</p>
+                        <p>微信号:&nbsp;&nbsp;${supplier.weChat}</p>
+                        <p>详细地址:&nbsp;&nbsp;${supplier.shengTxt}${supplier.shiTxt}${supplier.quTxt}${supplier.address}</p>
+                        <p>经营场所:&nbsp;&nbsp;${supplier.typeTxt}</p>
+                        <p>包损方式:&nbsp;&nbsp;${supplier.compensateTxt}</p>
+                        <p>是否支持进口订单:&nbsp;&nbsp;${supplier.orderSupportTxt}</p>
+                    </div>
+                </div>
+                <%
+                var catalogs=@com.dbd.cms.model.Supplier.dao.getCatalogs(supplier.id);
+                var ordertypes=@com.dbd.cms.model.Supplier.dao.getOrdertypes(supplier.id);
+                if(isNotEmpty(catalogs)){%>
+                <div class="widget">
+                    <h4 class="title">经营品系</h4>
+                    <div class="content tag-cloud">
+                        <%for( c in catalogs){%>
+                            <a href="#">${c.taxonomyTxt}</a>
+                        <%}%>
+                    </div>
+                </div>
+                <%}%>
+                <%if(supplier.orderSupport=='00'&&isNotEmpty(ordertypes)){%>
+                <div class="widget">
+                    <h4 class="title">支持订单类型</h4>
+                    <div class="content tag-cloud">
+                        <%for( c in ordertypes){%>
+                        <a href="#">${c.taxonomyTxt}</a>
+                        <%}%>
+                    </div>
+                </div>
+                <%}%>
+
+                <%if(isNotEmpty(supplier.QRCodePic)){%>
+                <div class="widget">
+                    <h4 class="title">扫码加他</h4>
+                    <div class="content community">
+                        <p><img class="img-responsive" src="${qn_url}/${supplier.QRCodePic}"></p>
+                    </div>
+                </div>
+                <%}%>
+            </aside>
+        </div>
+        <%include("/front/widget/mb.html"){}%>
+    </div>
+</section>
+
+<form action="/supplier/view" id="form">
+    <input type="hidden" name="id" id="id">
+    <input type="hidden" name="sheng" value="${sheng!}" id="sheng">
+    <input type="hidden" name="shi" value="${shi!}" id="shi">
+    <input type="hidden" name="qu" value="${qu!}" id="qu">
+    <input type="hidden" name="search" value="${search!}" id="search">
+
+</form>
+
+<script>
+    function view(id) {
+        $('#id').val(id);
+        $('#form').submit();
+    }
+
+</script>
+<%}%>

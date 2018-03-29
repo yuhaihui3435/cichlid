@@ -1,0 +1,41 @@
+<form method="post" id="watermark" enctype="multipart/form-data">
+    <h4>水印设置</h4>
+    <div class="form-group"><label>开启水印功能</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="openWatermark_y"
+                name="openWatermark"/>是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="openWatermark_n"
+                name="openWatermark"/>否
+    </div>
+    <div class="form-group"><label>水印图片</label> <input
+            type="file" id="watermarkPic"
+            name="watermarkPic"
+    />
+        <input type="hidden" name="watermarkPic_bak" id="watermarkPic_bak">
+    </div>
+    <div class="form-group"><label>水印文本内容</label>
+        <input type="text" id="watermarkText" class="form-control"
+               name="watermarkText"
+        >
+    </div>
+    <div class="form-group"><label>透明度</label>
+        <input type="text" id="watermarkTransparency" class="form-control"
+               name="watermarkTransparency"
+                >
+    </div>
+    <div class="form-group"><label>水印位置</label>
+        <select name="watermarkPosition" id="watermarkPosition" class="form-control">
+            <option value="lu">左上角</option>
+            <option value="ru">右上角</option>
+            <option value="center">正中间</option>
+            <option value="lb">左下角</option>
+            <option value="rb">右下角</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-success" id="watermark_btn" value="保存修改"/></div>
+
+</form>

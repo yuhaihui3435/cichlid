@@ -1,0 +1,60 @@
+<%layout("/admin/_layout.html"){%>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            用户信息
+            <small>管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">用户列表</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <p class="toolbar">
+            <a class="create btn btn-success" href="javascript:">新增用户</a>
+            <a class="forbidden btn btn-danger" href="javascript:">禁用用户</a>
+            <a class="resumed btn btn-primary" href="javascript:">恢复用户</a>
+            <span class="bootTableAlert"></span>
+        </p>
+        <table id="table"
+               data-toggle="table"
+               data-url="/adminUser/list"
+               data-content-type="application/x-www-form-urlencoded" data-method="POST"
+               data-show-columns="true"
+               data-show-refresh="true"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-toolbar=".toolbar"
+               data-search="true" >
+            <thead>
+            <tr>
+                <th data-field="status" data-checkbox="true"></th>
+                <th data-field="id" data-visible="false"></th>
+                <th data-field="loginname">登录名</th>
+                <th data-field="nickname">昵称</th>
+                <th data-field="email">EMAIL</th>
+                <th data-field="phone">电话</th>
+                <th data-field="catTxt">创建时间</th>
+                <th data-field="loggedTxt">最后登录时间</th>
+                <th data-field="contentCount">发布数量</th>
+                <th data-field="commentCount">评论数量</th>
+                <th data-field="statusTxt">状态</th>
+                <th data-field="action"
+                    data-align="center"
+                    data-formatter="actionFormatter"
+                    data-events="actionEvents">操作
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</div>
+<%include("/admin/user/form.html"){}%>
+<%include("/admin/user/view.html"){}%>
+<script  src="/static/js/user.js"></script>
+<%}%>

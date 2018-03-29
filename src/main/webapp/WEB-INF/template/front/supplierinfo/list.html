@@ -1,0 +1,126 @@
+<%layout("/front/_layout.html"){%>
+
+<section class="content-wrap main-container" >
+    <div class="container">
+        <ol class="breadcrumb" style="background: #ffffff">
+            <li><a href="/"  style="font-size: 2em">首页</a></li>
+            <li class="active" style="font-size: 1.5em">精选鱼商</li>
+        </ol>
+
+        <div class="row">
+
+            <main class="col-md-8 main-content">
+                <% for (supplier in page.list){%>
+                <article class="post">
+                    <div class="post-head">
+                        <h1 class="post-title">${supplier.name}</h1>
+                        <div class="post-meta">
+                        <!--<span class="author">-->
+
+                        <!--</span>-->
+                        <time class="post-date">入驻时间：${supplier.cAt,'yyyy-MM-dd'}</time>
+                        </div>
+                    </div>
+                    <div class="featured-media">
+                        <img src="${qn_url}/${supplier.picsStr}">
+                    </div>
+                    <div class="post-content">
+                        ${supplier.summary}
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/supplier/view?id=${supplier.id}" target="_blank" class="btn btn-default">查看</a>
+
+                    </div>
+                    <footer class="post-footer clearfix"></footer>
+                </article>
+                <%}%>
+                <%if(isEmpty(page.list)){%>
+                    <%include("/common/dataNull.html",{dataNullMsg:'没有找到符合条件的鱼商信息。'}){}  %>
+                <%}%>
+
+                <%if(isNotEmpty(page.list)){%>
+                <div class="f-pagination">
+
+                    <%if(!@page.isFirstPage()){%>
+                        <a class="newer-posts" href="changePage('${(page.pageNumber-1)*15-15}')"><i class="fa fa-angle-left fa-fw"></i></a>
+                    <%}%>
+
+                    <span class="page-number">第${page.pageNumber}页/共${page.totalPage}页</span>
+
+                    <%if(!@page.isLastPage()){%>
+                        <a class="newer-posts" href="changePage('${(page.pageNumber+1)*15}')"><i class="fa fa-angle-left fa-fw"></i></a>
+                    <%}%>
+                </div>
+                <%}%>
+            </main>
+            <aside class="col-md-4 sidebar">
+                <div class="widget">
+                    <h4 class="title">搜索鱼商</h4>
+                    <div class="content community">
+                        <form action="/supplier/" method="post" id="searchForm">
+                            <input type="hidden" id="offset" name="offset" >
+                            <input type="hidden" id="id" name="id">
+
+                        <p>
+                            <div class="form-group"><label>省</label>
+                            <select class="form-control" id="shengSelect" onchange="queryShi()" name="sheng">
+                                <option value="">请选择</option>
+                                <%for (s in shengList){%>
+                                    <option value="${s.id}">${s.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                            <div class="form-group"><label>市</label>
+                            <select class="form-control" id="shiSelect" onchange="queryQu()" name="shi">
+                                <option value="" >请选择</option>
+                                <%for (a in shiList!){%>
+                                <option value="${a.id}">${a.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                            <div class="form-group"><label>区县</label>
+                            <select class="form-control" id="quSelect"  name="qu">
+                                <option value="">请选择</option>
+                                <%for (b in quList!){%>
+                                <option value="${b.id}">${b.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                            <div class="form-group"><label>关键字</label>
+                        <input type="text" name="search" value="${search!}" class="form-control">
+                            </div>
+                        </p>
+                        <br>
+                        <p>
+                            <button class="btn btn-default"  type="button" onclick="changePage(1)">搜索</button>
+                        </p>
+                        </form>
+                    </div>
+                </div>
+
+                <%include("/front/widget/oi.html") {} %>
+                <%include("/front/widget/art.html") {} %>
+                <%include("/front/widget/kl.html") {} %>
+            </aside>
+        </div>
+    </div>
+</section>
+<script>
+    var sheng='${sheng!}';
+    var shi='${shi!}';
+    var qu='${qu!}';
+
+
+    function view(id) {
+        $("#id").val(id);
+        $("#searchForm").attr("action","/supplier/view?id="+id);
+        $("#searchForm").submit();
+    }
+    function changePage(pn) {
+        $("#searchForm").submit();
+    }
+</script>
+
+<script  src="/static/js/f_supplier.js"></script>
+
+<%}%>

@@ -1,0 +1,31 @@
+<form method="post" id="modal-form">
+    <div id="form-modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-small">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">角色信息</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="roleId" name="role.id">
+                    <div class="form-group"><label>名称<span class="required">*</span></label><input
+                            class="form-control"
+                            type="text" id="role.name"
+                            name="role.name" maxlength="50"
+                    />
+                    </div>
+                    <div class="form-group"><label>描述</label><input
+                            class="form-control"
+                            type="text" id="role.description"
+                            name="role.description" maxlength="255"
+                    />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="submit" class="btn btn-success" id="role_btn" value="保存"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,55 @@
+<form method="post" id="comment" enctype="multipart/form-data">
+    <h4>评论设置</h4>
+    <div class="form-group"><label>允许匿名用户评论</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="anonymousComment_y"
+                name="anonymousComment"/>是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="anonymousComment_n"
+                name="anonymousComment"/>否
+    </div>
+    <div class="form-group"><label>评论审核</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="checkCommnet_y"
+                name="checkCommnet"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="checkCommnet_n"
+                name="checkCommnet"
+        />否
+    </div>
+    <div class="form-group"><label>开启评论验证码</label>
+        <input
+                class="flat-red" value="0"
+                type="radio" id="identifyingCodeComment_y"
+                name="identifyingCodeComment"
+        />是
+        <input
+                class="flat-red" value="1" checked
+                type="radio" id="identifyingCodeComment_n"
+                name="identifyingCodeComment"
+        />否
+    </div>
+    <div class="form-group"><label>匿名用户昵称</label><input
+            class="form-control"
+            type="text" id="anonymousNickname"
+            name="anonymousNickname" maxlength="255" placeholder="默认显示 网友"
+    />
+    </div>
+
+    <div class="form-group"><label>匿名用户头像</label><input
+
+            type="file" id="anonymousAvatar"
+            name="anonymousAvatar"
+    />
+        <input type="hidden" name="anonymousAvatar_bak" id="anonymousAvatar_bak">
+    </div>
+
+    <div class="form-group">
+        <input type="button" class="btn btn-success" id="comment_btn" value="保存修改"/></div>
+
+</form>

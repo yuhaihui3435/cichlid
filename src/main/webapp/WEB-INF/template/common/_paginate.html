@@ -1,0 +1,106 @@
+<div class="am-cf">
+<%
+    var pageNumber = page.pageNumber;   // 当前页
+    var totalPage = page.totalPage;     // 总页数
+    var num_display_entries = 11;       // 每次显示多少页
+    var num_edge_entries = 2;           // 前后各多少页
+    var ellipse_text = "...";
+    // uri地址 如果不是/结束的 那么就表示带有参数，使用res风格
+    if (!strutil.endWith(uri,"/")) {
+        uri = uri + "-";
+    }
+    printf("一共有"+page.totalRow+"记录");
+    if (page.totalRow > page.pageSize) {
+    
+    printf("<div class='am-fr'>");
+    printf("<ul class='am-pagination'>");
+        // 上一页
+        if(pageNumber != 1) { 
+            printf("<li><a href='%s%s'>«</a></li>",uri,pageNumber-1);
+        } else {
+            printf("<li class='am-disabled'><a href='#'>«</a></li>");
+        }
+        
+        
+         
+       
+        // 总页数大于 (显示的页数+前后显示) 表示需要显示很多页
+        var pageCount = totalPage - (num_display_entries + num_edge_entries * 2);
+        if (pageCount > 0) {
+            var i = 1;
+            var len = 0;
+            var _start = trunc(num_display_entries / 2);
+            var _end = _start;
+            if (num_display_entries%2 == 0) {
+                _start = _start - 1;
+            }
+             
+            // 页码-前
+            if (pageNumber - _start - num_edge_entries >= num_edge_entries) {
+                while(i < num_edge_entries + 1) {
+                    printf("<li><a href='%s%s'>%s</a></li> ",uri,i,i);
+                    i = i + 1;
+                }
+                printf("<li><span>%s</span></li> ",ellipse_text);
+                 
+                i = pageNumber-_start;
+                len = pageNumber + _end+1;
+            } else {
+                len = num_display_entries+1;
+            }
+             
+            var show_num_edge_entries_next = totalPage - pageNumber - _end - num_edge_entries > 0;
+            if (!show_num_edge_entries_next) {
+                i = pageNumber - _start;
+                if (totalPage - pageNumber - _end < 0) {
+                    i = totalPage - num_display_entries+1;
+                }
+                len = totalPage + 1;
+            }
+             
+            // 显示中间的那串页码
+            while(i < len) {
+                if (pageNumber == i) {
+                    printf("<li class='am-active'><a href='#'>%s</a></li> ",i);
+                } else {
+                    printf("<li><a href='%s%s'>%s</a></li> ",uri,i,i);
+                }
+                i = i + 1;
+            }
+             
+            // 页码-后
+            if (show_num_edge_entries_next) {
+                printf("<li><span>%s</span></li> ",ellipse_text);
+                i = totalPage + 1 - num_edge_entries;
+                while(i < totalPage + 1) {
+                    printf("<li><a href='%s%s'>%s</a></li> ",uri,i,i);
+                    i = i + 1;
+                }
+            }
+        } else {
+            // 显示全部页码
+            var i = 1;
+            while(i < totalPage + 1) {
+                if (pageNumber == i) {
+                    printf("<li class='am-active'><a href='#'>%s</a></li> ",i);
+                } else {
+                    printf("<li><a href='%s%s'>%s</a></li> ",uri,i,i);
+                }
+                i = i + 1;
+            }
+        }
+        
+         // 下一页
+        if(pageNumber != totalPage) {
+            printf("<li> <a href='%s%s'>&gt;</a></li>",uri,pageNumber+1);
+        } else {
+            printf(" <li class='am-disabled'><a href='#'>»</a></li>");
+        }
+    %>
+
+</ul>
+</div>
+<%
+    }
+%>
+</div>

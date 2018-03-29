@@ -1,0 +1,54 @@
+<%layout("/admin/_layout.html"){%>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            上传图片
+            <small>管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">图片</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <p class="toolbar">
+            <a class="create btn btn-success" href="javascript:" onclick="egsi()"><i class="fa fa-thumb-tack"></i>审核通过</a>
+            <a class="forbidden btn btn-danger" href="javascript:" onclick="delPic()"><i class="fa fa-trash-o"></i>删除</a>
+            <!--<a class="forbidden btn btn-success" href="javascript:"><i class="fa fa-recycle"></i>回收站</a>-->
+            <span class="bootTableAlert"></span>
+        </p>
+        <table id="table"
+               data-toggle="table"
+               data-url="/adminPic/list"
+               data-content-type="application/x-www-form-urlencoded" data-method="POST"
+               data-show-columns="true"
+               data-show-refresh="true"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-toolbar=".toolbar"
+               data-search="true" >
+            <thead>
+            <tr>
+                <th data-field="ck" data-checkbox="true"></th>
+                <th data-field="module">模块</th>
+                <th data-field="moduleName">名字</th>
+                <th data-field="catTxt">上传时间</th>
+                <th data-field="statusTxt">状态</th>
+                <th data-field="originalTxt">上传者</th>
+                <th data-field="action"
+                    data-align="center"
+                    data-formatter="actionFormatter"
+                    data-events="actionEvents">操作
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</div>
+
+
+<script  src="/static/js/pic.js"></script>
+<%}%>

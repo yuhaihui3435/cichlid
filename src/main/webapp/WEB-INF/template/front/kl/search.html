@@ -1,0 +1,94 @@
+<%layout("/front/_layout.html"){%>
+
+
+
+<section class="content-wrap main-container" >
+    <div class="container">
+        <ol class="breadcrumb" style="background: #ffffff">
+            <li><a href="/"  style="font-size: 2em">首页</a></li>
+            <li class="active" style="font-size: 1.5em">知识库</li>
+        </ol>
+<div class="row" id="q_rs" style="display: none">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <form class="form-inline" onsubmit="return false;">
+                            <div class="form-group" style="display: none">
+                                <select id="area" name="knowledgebase.areaId" class="form-control input-large" onchange="filterSearch(this)">
+                                    <option value="">请选择地域</option>
+                                    <%
+                                    //for(area in f_areas){
+                                    %>
+
+                                    <%//}%>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display: none">
+
+
+                                <select id="p_subGroup input-group-sm" name="" class="form-control input-large"
+                                        onchange="querySGChildren(this.value)">
+                                    <option value="">亚群体大类</option>
+                                    <%
+                                    //for(psg in subGroup){
+                                    %>
+
+                                    <%//}%>
+                                </select>
+                            </div>
+                            <div class="form-group input-group-sm" style="display: none">
+                                <select id="subGroup" name="knowledgebase.sgId" onchange="filterSearch(this)" class="form-control input-large">
+                                    <option value="">请先选择亚群体大类</option>
+                                </select>
+                            </div>
+                            <div class="form-group input-group-sm">
+
+                                <select id="p_species" name="" class="form-control input-large"
+                                        onchange="querySChildren(this.value)">
+                                    <option value="">属种大类</option>
+                                    <%
+                                    for(specy in species){
+                                    %>
+                                    <option value="${specy.id}">${specy.title}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group input-group-sm">
+                                <select id="species" name="knowledgebase.speciesId" onchange="filterSearch(this)" class="form-control input-large">
+                                    <option value="">请先选择属种大类</option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm" >
+                                <input type="text" name="search" id="search"  class="form-control "  placeholder="英文、中文、拼音缩写"/>
+                                <span class="input-group-btn">
+                                   <button type="button" class="btn  btn-primary  btn-flat " id="search_btn" >查询</button>
+                                </span>
+
+
+                            </div>
+                            <div class="input-group " >
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
+
+                </ul>
+            </div>
+            <div class="box-footer text-center">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</section>
+<script  src="/static/js/f_kl.js"></script>
+<%}

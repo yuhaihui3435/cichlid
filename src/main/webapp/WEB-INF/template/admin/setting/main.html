@@ -1,0 +1,47 @@
+<%layout("/admin/_layout.html"){%>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            设置
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li class="active">主窗体</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="nav-tabs-custom ">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab">常规</a></li>
+                <li><a href="#tab_2" data-toggle="tab">评论</a></li>
+                <li><a href="#tab_3" data-toggle="tab">通知</a></li>
+                <li><a href="#tab_4" data-toggle="tab">SEO</a></li>
+                <!--<li><a href="#tab_5" data-toggle="tab">水印</a></li>-->
+                <li><a href="#tab_6" data-toggle="tab">登录注册</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <%include("/admin/setting/conventional.html"){}%>
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    <%include("/admin/setting/comment.html"){}%>
+                </div>
+                <div class="tab-pane" id="tab_3">
+                    <%include("/admin/setting/notify.html"){}%>
+                </div>
+                <div class="tab-pane" id="tab_4">
+                    <%include("/admin/setting/seo.html"){}%>
+                </div>
+                <!--<div class="tab-pane" id="tab_5">-->
+                    <!--<%include("/admin/setting/watermark.html"){}%>-->
+                <!--</div>-->
+                <div class="tab-pane" id="tab_6">
+                    <%include("/admin/setting/login.html"){}%>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/static/js/setting.js"></script>
+<%}%>

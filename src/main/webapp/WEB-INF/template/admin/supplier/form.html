@@ -1,0 +1,190 @@
+<form method="post" id="modal-form" enctype="multipart/form-data">
+    <div id="form-modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-large">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">鱼商信息</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="supplier.id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"><label>名称<span class="required">*</span></label><input
+                                    class="form-control"
+                                    type="text" id="name"
+                                    name="supplier.name" maxlength="255"
+                            />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"><label>电话</label><input
+                                    class="form-control"
+                                    type="text" id="tel"
+                                    name="supplier.tel" maxlength="255"
+                            />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group"><label>省份</label>
+
+                                <select id="f_shengSelect" name="supplier.sheng" onchange="f_queryShi()">
+                                    <option value="">请选择</option>
+                                    <% for( sheng in shengList ){%>
+                                    <option value="${sheng.id}">${sheng.name}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>城市</label>
+                                <select id="f_shiSelect" name="supplier.shi" onchange="f_queryQu()">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>区县</label>
+
+                                <select id="f_quSelect" name="supplier.qu">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group"><label>地址</label><input
+                                    class="form-control"
+                                    type="text" id="address"
+                                    name="supplier.address" maxlength="255"
+                            />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group"><label>经营规模</label>
+
+                                <select id="type" name="supplier.type" >
+                                    <option value="">请选择</option>
+                                    <option value="00">鱼房</option>
+                                    <option value="01">鱼场</option>
+                                    <option value="02">鱼店</option>
+                                    <option value="03">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>包损方式</label>
+                                <select id="compensate" name="supplier.compensate">
+                                    <option value="">请选择</option>
+                                    <option value="00">包损</option>
+                                    <option value="01">不包损</option>
+                                    <option value="02">包一半</option>
+                                    <option value="03">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>网站认证</label>
+
+                                <select id="auth" name="supplier.auth" >
+                                    <option value="00" selected>是</option>
+                                    <option value="01">否</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group"><label>经度</label><input
+                                    class="form-control"
+                                    type="text" id="lng"
+                                    name="supplier.lng" maxlength="22"
+                            />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>纬度</label><input
+                                    class="form-control"
+                                    type="text" id="lat"
+                                    name="supplier.lat" maxlength="22"
+                            />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>微信号</label>
+                                <input type="text" class="form-control" maxlength="50" name="supplier.weChat" id="weChat">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group"><label>经营种类</label>
+                                <select  name="catalog" id="catalog">
+                                    <%for (a in areas){%>
+                                        <option value="${a.id}">${a.title}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>是否置顶</label>
+                                <select  name="isTop" id="isTop">
+                                    <option value="00">是</option>
+                                    <option value="01" selected>否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>订单模式</label>
+                                <select  name="supplier.order_support" id="orderSupport" onchange="orderSupportChange()">
+                                    <option value="00">支持</option>
+                                    <option value="01" selected>不支持</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="orderTypeDiv" style="display: none">
+                            <div class="form-group"><label>订单类型</label>
+                                <select  name="orderType" id="orderType">
+                                    <%for (os in orderSupport){%>
+                                    <option value="${os.id}">${os.title}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label>简介</label>
+                                <textarea  name="supplier.summary" id="summary" style="width: 100%;height: 200px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label>微信二维码</label>
+                                <input type="file" name="qrCode" id="qrCode" >
+                                <input type="hidden" id="qrCode_bak" name="qrCode_bak">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label>封面</label>
+                                <input type="file" name="thumbnail" id="thumbnail" >
+                                <input type="hidden" id="thumbnail_bak" name="thumbnail_bak">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label>说明</label>
+                                <textarea id="text" name="supplier.text" style="height:380px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="submit" class="btn btn-success" id="btn" value="保存"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
